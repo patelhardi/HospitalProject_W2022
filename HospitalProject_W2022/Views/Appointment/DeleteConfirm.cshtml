@@ -1,0 +1,21 @@
+﻿@model HospitalProject_W2022.Models.AppointmentDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Do you want to Delete Appointment for @Model.Reason ?</h2>
+
+<a href="/Appointment/List" class="btn btn-dblue btn-lg" role="button">
+    <span class="glyphicon glyphicon-arrow-left"></span> Back to
+    <br />the Appointment list
+</a>
+
+<br />
+
+<div>
+    <form action="/Appointment/Delete/@Model.AID" method="POST" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
+        <input type="submit" value="Delete" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
+    </form>
+</div>
+
+

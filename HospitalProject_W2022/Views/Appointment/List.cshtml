@@ -1,0 +1,21 @@
+﻿@model IEnumerable<HospitalProject_W2022.Models.AppointmentDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<div>
+    <a href="/Appointment/New" class="btn btn-dblue btn-lg" role="button">
+        <span class="glyphicon glyphicon-user glyphsize"></span>
+        <br />New
+        <span class="glyphicon glyphicon-plus green"></span>
+        <br />Appointment
+    </a>
+</div>
+
+<h2>List of Appointments</h2>
+@foreach (var appointment in Model)
+{
+    <div><a href="/Appointment/Details/@appointment.AID">Patient Name: @appointment.FName @appointment.LName</a></div>
+    <div>Reason: @appointment.Reason</div>
+}
+

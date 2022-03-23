@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+
+<div>
+    <a href="/Appointment/List" class="btn btn-dblue btn-lg" role="button">
+        <span class="glyphicon glyphicon-arrow-left"></span> Back to
+        <br />the Appointment list
+    </a>
+</div>
+
+<h2>Create New Appointment</h2>
+
+<form action="/Appointment/Create" method="POST" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
+    <div>
+        <label style="padding: 12px 12px 12px 0; display: inline-block;">Date:</label>
+        <input type="date" name="date" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    </div>
+    <div>
+        <label style="padding: 12px 12px 12px 0; display: inline-block;">Time:</label>
+        <input type="text" name="time" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    </div>
+    <div>
+        <label style="padding: 12px 12px 12px 0; display: inline-block;">Reason:</label>
+        <input type="text" name="reason" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    </div>
+    <div>
+        <label style="padding: 12px 12px 12px 0; display: inline-block;">Patient:</label>
+        <input type="text" name="PID" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+
+        <!--  <label style="padding: 12px 12px 12px 0; display: inline-block;">Patient Last Name:</label>
+           <input type="text" name="lname" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" /> -->
+    </div>
+    <div>
+        <input type="submit" value="Make Appointment" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
+    </div>
+</form>
+
