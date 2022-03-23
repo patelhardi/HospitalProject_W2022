@@ -30,6 +30,7 @@ namespace HospitalProject_W2022.Models
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Shift> Shifts { get; set; }
 
         public static ApplicationDbContext Create()
         {

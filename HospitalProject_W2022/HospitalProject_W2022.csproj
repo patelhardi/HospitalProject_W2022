@@ -185,6 +185,7 @@
     <Compile Include="Controllers\AppointmentDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ShiftDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -196,6 +197,10 @@
     <Compile Include="Migrations\202203231627526_createpatientsatffdepartmentandappointmententity.Designer.cs">
       <DependentUpon>202203231627526_createpatientsatffdepartmentandappointmententity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202203231757241_createshiftentity.cs" />
+    <Compile Include="Migrations\202203231757241_createshiftentity.Designer.cs">
+      <DependentUpon>202203231757241_createshiftentity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -203,6 +208,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Patient.cs" />
+    <Compile Include="Models\Shift.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -217,6 +223,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <None Include="jsondata\appointment.json" />
+    <None Include="jsondata\shift.json" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -294,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202203231627526_createpatientsatffdepartmentandappointmententity.resx">
       <DependentUpon>202203231627526_createpatientsatffdepartmentandappointmententity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203231757241_createshiftentity.resx">
+      <DependentUpon>202203231757241_createshiftentity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

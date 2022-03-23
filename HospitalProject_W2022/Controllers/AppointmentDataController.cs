@@ -78,9 +78,9 @@ namespace HospitalProject_W2022.Controllers
         [Route("api/AppointmentData/FindAppointment/{id}")]
         public IHttpActionResult FindAppointment(int id)
         {
-            Debug.WriteLine("id:" + id);
+            //Debug.WriteLine("id:" + id);
             Appointment appointment = db.Appointments.Find(id);
-            Debug.WriteLine(appointment);
+            //Debug.WriteLine(appointment);
             AppointmentDto appointmentDto = new AppointmentDto()
             {
                 AID = appointment.AID,
