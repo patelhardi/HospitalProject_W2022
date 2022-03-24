@@ -1,0 +1,17 @@
+﻿@model IEnumerable<HospitalProject_W2022.Models.DepartmentDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>All Departments Infomation</h2>
+
+<a href="/department/new" class="btn btn-lg" role="button">
+    <span class="glyphicon glyphicon-home glyphsize"></span>
+    <br />Add New Department
+</a>
+
+@foreach (var department in Model)
+{
+    <h2><a href="/department/details/@department.DID">@department.DName</a></h2>
+    <div>Department ID: @department.DID</div>
+}
