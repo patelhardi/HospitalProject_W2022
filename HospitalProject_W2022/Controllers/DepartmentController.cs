@@ -18,12 +18,21 @@ namespace HospitalProject_W2022.Controllers
 {
     public class DepartmentController : Controller
     {
+
+
         private static readonly HttpClient client;
         private JavaScriptSerializer jss = new JavaScriptSerializer();
 
         static DepartmentController()
         {
-            client = new HttpClient();
+            HttpClientHandler handler = new HttpClientHandler()
+            {
+                AllowAutoRedirect = false,
+                //cookies are manually set in RequestHeader
+                UseCookies = false
+            };
+
+            client = new HttpClient(handler);
             Debug.WriteLine(client);
 
             client.BaseAddress = new Uri("https://localhost:44377/api/departmentdata/");
@@ -31,9 +40,30 @@ namespace HospitalProject_W2022.Controllers
 
         }
 
+        private void GetApplicationCookie()
+        {
+            string token = "";
+            //HTTP client is set up to be reused, otherwise it will exhaust server resources.
+            //This is a bit dangerous because a previously authenticated cookie could be cached for
+            //a follow-up request from someone else. Reset cookies in HTTP client before grabbing a new one.
+            client.DefaultRequestHeaders.Remove("Cookie");
+            if (!User.Identity.IsAuthenticated) return;
+
+            HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies.Get(".AspNet.ApplicationCookie");
+            if (cookie != null) token = cookie.Value;
+
+            //collect token as it is submitted to the controller
+            //use it to pass along to the WebAPI.
+            Debug.WriteLine("Token Submitted is : " + token);
+            if (token != "") client.DefaultRequestHeaders.Add("Cookie", ".AspNet.ApplicationCookie=" + token);
+
+            return;
+        }
+
         // GET: Department/List
         public ActionResult List()
         {
+            GetApplicationCookie();
             //curl https://localhost:44377/api/departmentdata/listdepartments
             string url = "listdepartments";
             HttpResponseMessage response = client.GetAsync(url).Result;
@@ -48,9 +78,9 @@ namespace HospitalProject_W2022.Controllers
         }
 
         // GET: Department/Details/5
-        [Authorize(Roles = "Admin")]
         public ActionResult Details(int id)
         {
+            GetApplicationCookie();
             //curl https://localhost:44377/api/departmentdata/findDepartment/{id}
             string url = "findDepartment/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
@@ -81,6 +111,8 @@ namespace HospitalProject_W2022.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create(Department department)
         {
+            GetApplicationCookie();
+
             System.Diagnostics.Debug.WriteLine("the jsonpatlaod is: ");
             // add new department into system using the API
             //curl -H "Content-Type:application/json" -d @department.json https://localhost:44377/api/departmentdata/adddepartment
@@ -109,6 +141,8 @@ namespace HospitalProject_W2022.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
+            GetApplicationCookie();
+
             string url = "findDepartment/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
@@ -122,6 +156,8 @@ namespace HospitalProject_W2022.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Update(int id, Department department)
         {
+            GetApplicationCookie();
+
             string url = "updatedepartment/" + id;
 
             string jsonpayload = jss.Serialize(department);
@@ -146,6 +182,8 @@ namespace HospitalProject_W2022.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirm(int id)
         {
+            GetApplicationCookie();
+
             string url = "findDepartment/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
@@ -159,6 +197,8 @@ namespace HospitalProject_W2022.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
+            GetApplicationCookie();
+
             string url = "deletedepartment/" + id;
 
             HttpContent content = new StringContent("");
