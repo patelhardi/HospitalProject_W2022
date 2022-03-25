@@ -11,8 +11,7 @@ using System.Web.Http.Description;
 using HospitalProject_W2022.Models;
 using System.Web.Script.Serialization;
 using System.Web;
-
-
+using System.Diagnostics;
 
 
 namespace HospitalProject_W2022.Controllers
@@ -25,7 +24,11 @@ namespace HospitalProject_W2022.Controllers
         static DepartmentController()
         {
             client = new HttpClient();
+            Debug.WriteLine(client);
+
             client.BaseAddress = new Uri("https://localhost:44377/api/departmentdata/");
+            Debug.WriteLine(client.BaseAddress);
+
         }
 
         // GET: Department/List
@@ -35,27 +38,28 @@ namespace HospitalProject_W2022.Controllers
             string url = "listdepartments";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            // Debug.WriteLine("the response code is >>" + response.StatusCode);
+            Debug.WriteLine("the response code is >>" + response.StatusCode);
 
             IEnumerable<DepartmentDto> departments = response.Content.ReadAsAsync<IEnumerable<DepartmentDto>>().Result;
-            // Debug.WriteLine("number of departments received >>");
-            // Debug.WriteLine(departments.Count());
+            Debug.WriteLine("(controller)number of departments received >>");
+            Debug.WriteLine(departments.Count());
 
             return View(departments);
         }
 
         // GET: Department/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int id)
         {
             //curl https://localhost:44377/api/departmentdata/findDepartment/{id}
             string url = "findDepartment/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            // Debug.WriteLine("the response code is >>" + response.StatusCode);
+            Debug.WriteLine("the response code is >>" + response.StatusCode);
 
             DepartmentDto selectedDepartment = response.Content.ReadAsAsync<DepartmentDto>().Result;
-            //Debug.WriteLine("departments received >>");
-            //Debug.WriteLine(selectedDepartment.DName);
+            Debug.WriteLine("departments received >>");
+            Debug.WriteLine(selectedDepartment.DName);
 
             return View(selectedDepartment);
         }
@@ -66,6 +70,7 @@ namespace HospitalProject_W2022.Controllers
         }
 
         // GET: Department/New
+        [Authorize(Roles = "Admin")]
         public ActionResult New()
         {
             return View();
@@ -73,6 +78,7 @@ namespace HospitalProject_W2022.Controllers
 
         // POST: Department/Create
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(Department department)
         {
             System.Diagnostics.Debug.WriteLine("the jsonpatlaod is: ");
@@ -100,6 +106,7 @@ namespace HospitalProject_W2022.Controllers
         }
 
         // GET: Department/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             string url = "findDepartment/" + id;
@@ -112,6 +119,7 @@ namespace HospitalProject_W2022.Controllers
 
         // POST: Department/Update/5
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Update(int id, Department department)
         {
             string url = "updatedepartment/" + id;
@@ -135,6 +143,7 @@ namespace HospitalProject_W2022.Controllers
         }
 
         // GET: Department/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirm(int id)
         {
             string url = "findDepartment/" + id;
@@ -147,6 +156,7 @@ namespace HospitalProject_W2022.Controllers
 
         // POST: Department/Delete/5
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             string url = "deletedepartment/" + id;

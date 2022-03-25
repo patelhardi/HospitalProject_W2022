@@ -4,14 +4,12 @@ using System.Linq;
 using System.Data;
 using System.Diagnostics;
 using HospitalProject_W2022.Models;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Net;
-
-
 
 namespace HospitalProject_W2022.Controllers
 {
@@ -21,8 +19,6 @@ namespace HospitalProject_W2022.Controllers
 
         // GET: api/DepartmentData/ListDepartments
         [HttpGet]
-        [Route("api/DepartmentData/ListDepartments")]
-
         public IEnumerable<DepartmentDto> ListDepartments()
         {
             List<Department> Departments = db.Departments.ToList();
@@ -40,7 +36,7 @@ namespace HospitalProject_W2022.Controllers
         // GET: api/DepartmentData/FindDepartment/5
         [ResponseType(typeof(Department))]
         [HttpGet]
-        [Route("api/DepartmentData/FindDepartment/{id}")]
+        [Authorize(Roles = "Admin")]
 
         public IHttpActionResult FindDepartment(int id)
         {
@@ -63,7 +59,7 @@ namespace HospitalProject_W2022.Controllers
         //Update function
         [ResponseType(typeof(void))]
         [HttpPost]
-
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult UpdateDepartment(int id, Department department)
         {
             Debug.WriteLine("debug>>>reached update department method.");
@@ -112,6 +108,7 @@ namespace HospitalProject_W2022.Controllers
         // POST: api/DepartmentData/AddDepartment
         [ResponseType(typeof(Department))]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult AddDepartment(Department department)
         {
             if (!ModelState.IsValid)
@@ -128,6 +125,7 @@ namespace HospitalProject_W2022.Controllers
         // POST: api/DepartmentData/DeleteDepartment/5
         [ResponseType(typeof(Department))]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult DeleteDepartment(int id)
         {
             Department department = db.Departments.Find(id);
