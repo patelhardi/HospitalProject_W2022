@@ -1,4 +1,5 @@
 ﻿using HospitalProject_W2022.Models;
+using HospitalProject_W2022.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,7 +69,11 @@ namespace HospitalProject_W2022.Controllers
         // GET: Shift/New
         public ActionResult New()
         {
-            return View();
+            //need staff information for staff dropdown
+            string url = "ListStaffs";
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            IEnumerable<StaffDto> staffOptions = response.Content.ReadAsAsync<IEnumerable<StaffDto>>().Result;
+            return View(staffOptions);
         }
 
         /// <summary>
@@ -108,11 +113,21 @@ namespace HospitalProject_W2022.Controllers
         // GET: Shift/Edit/5
         public ActionResult Edit(int id)
         {
+            UpdateShift viewModel = new UpdateShift();
+            
+            //selected shift information
             string url = "FindShift/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-
             ShiftDto selectedShiftDto = response.Content.ReadAsAsync<ShiftDto>().Result;
-            return View(selectedShiftDto);
+            viewModel.SelectedShift = selectedShiftDto;
+
+            //list of staff dropdown 
+            url = "ListStaffs";
+            response = client.GetAsync(url).Result;
+            IEnumerable<StaffDto> staffOptions = response.Content.ReadAsAsync<IEnumerable<StaffDto>>().Result;
+            viewModel.StaffOptions = staffOptions;
+
+            return View(viewModel);
         }
 
         /// <summary>

@@ -31,9 +31,32 @@ namespace HospitalProject_W2022.Controllers
             {
                 SHID = s.SHID,
                 Date = s.Date,
-                Type = s.Type
-            }));
+                Type = s.Type,
+                FName = s.Staff.FName,
+                LName = s.Staff.LName,
+                SID = s.SID
+            })) ;
             return shiftDtos;
+        }
+
+        /// <summary>
+        /// display list of all staffs
+        /// </summary>
+        /// <returns>Display list of staffs with name</returns>
+        // GET: api/ShiftData/ListStaffs
+        [HttpGet]
+        [Route("api/ShiftData/ListStaffs")]
+        public IEnumerable<StaffDto> ListStaffs()
+        {
+            List<Staff> staffs = db.Staffs.OrderBy(s => s.FName).ToList();
+            List<StaffDto> staffDtos = new List<StaffDto>();
+            staffs.ForEach(s => staffDtos.Add(new StaffDto()
+            {
+                SID = s.SID,
+                FName = s.FName,
+                LName = s.LName
+            }));
+            return staffDtos;
         }
 
         /// <summary>
@@ -52,7 +75,10 @@ namespace HospitalProject_W2022.Controllers
             {
                 SHID = shift.SHID,
                 Date = shift.Date,
-                Type = shift.Type
+                Type = shift.Type,
+                FName = shift.Staff.FName,
+                LName = shift.Staff.LName,
+                SID = shift.SID
             };
             if (shift == null)
             {

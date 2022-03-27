@@ -1,4 +1,5 @@
 ﻿using HospitalProject_W2022.Models;
+using HospitalProject_W2022.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,8 +56,8 @@ namespace HospitalProject_W2022.Controllers
         /// Display Details of perticular appointment
         /// select * from appointment where id = 1
         /// </summary>
-        /// <param name="id">appointmnet id passing parameter</param>
-        /// <returns>Details of selected appointment</returns>
+        /// <param name="id">appointment id passing parameter</param>
+        /// <returns>Details of selected appointment details</returns>
         // GET: Appointment/Details/5
         public ActionResult Details(int id)
         {
@@ -84,7 +85,11 @@ namespace HospitalProject_W2022.Controllers
         // GET: Appointment/New
         public ActionResult New()
         {
-            return View();
+            //need patient information for patient dropdown
+            string url = "ListPatients";
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            IEnumerable<PatientDto> patientOptions = response.Content.ReadAsAsync<IEnumerable<PatientDto>>().Result;
+            return View(patientOptions);
         }
 
         /// <summary>
@@ -123,11 +128,21 @@ namespace HospitalProject_W2022.Controllers
         // GET: Appointment/Edit/5
         public ActionResult Edit(int id)
         {
+            UpdateAppointment viewModel = new UpdateAppointment();
+
+            //selected appointment information
             string url = "FindAppointment/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-
             AppointmentDto selectedAppointmentDto = response.Content.ReadAsAsync<AppointmentDto>().Result;
-            return View(selectedAppointmentDto);
+            viewModel.SelectedAppointment = selectedAppointmentDto;
+
+            //list of staff dropdown 
+            url = "ListPatients";
+            response = client.GetAsync(url).Result;
+            IEnumerable<PatientDto> patientOptions = response.Content.ReadAsAsync<IEnumerable<PatientDto>>().Result;
+            viewModel.PatientOptions = patientOptions;
+
+            return View(viewModel);
         }
 
         /// <summary>

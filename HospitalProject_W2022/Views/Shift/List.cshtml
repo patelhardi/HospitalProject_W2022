@@ -15,6 +15,8 @@
 <h2>List of Shifts</h2>
 @foreach (var shift in Model)
 {
-    <div><a href="/Shift/Details/@shift.SHID">Date: @shift.Date.ToLongDateString() Type: @shift.Type</a></div>
+    <div><a href="/Shift/Details/@shift.SHID">Type: @shift.Type</a></div>
+    <div>Date: @shift.Date.ToLongDateString()</div>
+    <div>Staff Member: @shift.FName @shift.LName</div>
 }
 

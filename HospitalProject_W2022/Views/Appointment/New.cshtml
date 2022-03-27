@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<HospitalProject_W2022.Models.PatientDto>
 @{
     ViewBag.Title = "New";
 }
@@ -27,11 +27,20 @@
     </div>
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Patient:</label>
+        <select name="PID" style="padding: 12px 12px 12px 0; display: inline-block;">
+            @foreach (var patient in Model)
+            {
+                <option value="@patient.PID">@patient.FName @patient.LName</option>
+            }
+        </select>
+    </div>
+    <!--<div>
+        <label style="padding: 12px 12px 12px 0; display: inline-block;">Patient:</label>
         <input type="text" name="PID" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
 
-        <!--  <label style="padding: 12px 12px 12px 0; display: inline-block;">Patient Last Name:</label>
-           <input type="text" name="lname" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" /> -->
-    </div>
+        <label style="padding: 12px 12px 12px 0; display: inline-block;">Patient Last Name:</label>
+        <input type="text" name="lname" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    </div>-->
     <div>
         <input type="submit" value="Make Appointment" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
     </div>

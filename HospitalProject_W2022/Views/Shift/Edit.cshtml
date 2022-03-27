@@ -1,4 +1,4 @@
-﻿@model HospitalProject_W2022.Models.ShiftDto
+﻿@model HospitalProject_W2022.Models.ViewModels.UpdateShift
 @{
     ViewBag.Title = "Edit";
 }
@@ -12,14 +12,28 @@
     </a>
 </div>
 
-<form method="POST" action="/Shift/Update/@Model.SHID" enctype="multipart/form-data" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
+<form method="POST" action="/Shift/Update/@Model.SelectedShift.SHID" enctype="multipart/form-data" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
     <div style="display:none;">
         @* Pass through the shift ID *@
-        <input type="text" name="SHID" value="@Model.SHID" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <input type="text" name="SHID" value="@Model.SelectedShift.SHID" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    </div>
+    <div>
+        <label style="padding: 12px 12px 12px 0; display: inline-block;">Staff Member:</label>
+        <select name="SID" style="padding: 12px 12px 12px 0; display: inline-block;">
+            @foreach (var staff in Model.StaffOptions)
+            {
+                string selected = "";
+                if (staff.SID == Model.SelectedShift.SID)
+                {
+                    selected = "selected";
+                }
+                <option value="@staff.SID" @selected>@staff.FName @staff.LName</option>
+            }
+        </select>
     </div>
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Date:</label>
-        <input type="date" name="date" value="@Model.Date.ToShortDateString()" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <input type="date" name="date" value="@Model.SelectedShift.Date.ToShortDateString()" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Type:</label>
