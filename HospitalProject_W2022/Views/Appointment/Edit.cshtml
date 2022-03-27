@@ -19,7 +19,7 @@
     </div>
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Date:</label>
-        <input type="date" name="date" value="@Model.Date" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <input type="date" name="date" value="@Model.Date.ToShortDateString()" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Time:</label>

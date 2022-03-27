@@ -15,5 +15,6 @@ namespace HospitalProject_W2022.Models
         public DateTime DOB { get; set; }
         public long Contact { get; set; }
         public string DID { get; set; }
+
     }
 }

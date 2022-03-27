@@ -1,0 +1,32 @@
+﻿@model HospitalProject_W2022.Models.ShiftDto
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <nav>
+        <!-- Back to shift's list -->
+        <a href="/Shift/List" class="btn btn-dblue btn-lg" role="button">
+            <span class="glyphicon glyphicon-arrow-left"></span> Back to
+            <br />the Shift list
+        </a>
+        <!-- Update shift button -->
+        <a href="/Shift/Edit/@Model.SHID" class="btn btn-dblue btn-lg" role="button">
+            <span class="glyphicon glyphicon-user glyphsize"></span>
+            <br />Update
+            <span class="glyphicon glyphicon-edit"></span>
+            <br />Shift
+        </a>
+        <!-- Delete shift button -->
+        <a href="/Shift/DeleteConfirm/@Model.SHID" class="btn btn-dblue btn-lg" role="button">
+            <span class="glyphicon glyphicon-user glyphsize"></span>
+            <br />Delete
+            <span class="glyphicon glyphicon-minus"></span>
+            <br />Shift
+        </a>
+    </nav>
+</div>
+
+<div>Date: @Model.Date.ToLongDateString()</div>
+<div>Type: @Model.Type</div>
+

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<HospitalProject_W2022.Models.ShiftDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<div>
+    <a href="/Shift/New" class="btn btn-dblue btn-lg" role="button">
+        <span class="glyphicon glyphicon-user glyphsize"></span>
+        <br />Add New
+        <span class="glyphicon glyphicon-plus green"></span>
+        <br />Shift
+    </a>
+</div>
+
+<h2>List of Shifts</h2>
+@foreach (var shift in Model)
+{
+    <div><a href="/Shift/Details/@shift.SHID">Date: @shift.Date.ToLongDateString() Type: @shift.Type</a></div>
+}
+

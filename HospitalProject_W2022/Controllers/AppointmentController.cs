@@ -136,7 +136,7 @@ namespace HospitalProject_W2022.Controllers
         /// </summary>
         /// <param name="id">appointment id</param>
         /// <param name="appointment">appointmet details such as date, time, reason, patientid</param>
-        /// <returns>update information into appointment table for perticular appointments</returns>
+        /// <returns>update information into appointment table for perticular appointment</returns>
         // POST: Appointment/Update/5
         [HttpPost]
         public ActionResult Update(int id, Appointment appointment)

@@ -12,6 +12,8 @@ namespace HospitalProject_W2022.Models
         public int SHID { get; set; }
         public DateTime Date { get; set; }
         public string Type { get; set; }
+
+        //connect with staff table
     }
 
     public class ShiftDto

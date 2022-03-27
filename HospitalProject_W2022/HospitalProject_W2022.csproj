@@ -187,6 +187,7 @@
     <Compile Include="Controllers\DepartmentDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ShiftController.cs" />
     <Compile Include="Controllers\ShiftDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -286,6 +287,12 @@
     <Content Include="Views\Department\Error.cshtml" />
     <Content Include="Views\Department\List.cshtml" />
     <Content Include="Views\Department\New.cshtml" />
+    <Content Include="Views\Shift\Error.cshtml" />
+    <Content Include="Views\Shift\List.cshtml" />
+    <Content Include="Views\Shift\Details.cshtml" />
+    <Content Include="Views\Shift\New.cshtml" />
+    <Content Include="Views\Shift\Edit.cshtml" />
+    <Content Include="Views\Shift\DeleteConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
