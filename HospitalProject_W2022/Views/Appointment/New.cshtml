@@ -15,7 +15,7 @@
 <form action="/Appointment/Create" method="POST" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Date:</label>
-        <input type="date" name="date" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <input type="date" name="date" id="myDate" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Time:</label>
@@ -45,4 +45,23 @@
         <input type="submit" value="Make Appointment" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
     </div>
 </form>
+
+<!--Reference: https://stackoverflow.com/questions/43274559/how-do-i-restrict-past-dates-in-html5-input-type-date-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $(function () {
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+
+        var maxDate = year + '-' + month + '-' + day;
+        $('#myDate').attr('min', maxDate);
+    });
+</script>
 
