@@ -19,9 +19,11 @@ namespace HospitalProject_W2022.Controllers
 
         // GET: api/DepartmentData/ListDepartments
         [HttpGet]
+        [Authorize(Roles = "Admin")]
+
         public IEnumerable<DepartmentDto> ListDepartments()
         {
-            List<Department> Departments = db.Departments.ToList();
+            List<Department> Departments = db.Departments.OrderBy(d => d.DID).ToList();
             List<DepartmentDto> DepartmentDtos = new List<DepartmentDto>();
 
             Departments.ForEach(d => DepartmentDtos.Add(new DepartmentDto()
