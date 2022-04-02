@@ -1,0 +1,31 @@
+﻿@model HospitalProject_W2022.Models.PatientsDto
+@{
+    ViewBag.Title = "View";
+}
+
+<div id="containershow">
+    <nav>
+        <!-- Back to patient list -->
+        <a href="/patient/list" class="btn btn-dblue btn-lg" role="button">
+            <span class="glyphicon glyphicon-arrow-left"></span> Back to
+            <br />the Patient list
+        </a>
+        <!-- Update patient button -->
+        <a href="/patient/edit/@Model.PID" class="btn btn-dblue btn-lg" role="button">
+            <span class="glyphicon glyphicon-home glyphsize"></span>
+            <br />Update
+            <span class="glyphicon glyphicon-edit"></span>
+            <br />Patient
+        </a>
+        <!-- Delete patient button -->
+        <a style="color:#ab2020;" href="/patient/deleteconfirm/@Model.PID" class="btn btn-dblue btn-lg" role="button">
+            <span class="glyphicon glyphicon-home glyphsize"></span>
+            <br />Delete
+            <span class="glyphicon glyphicon-minus"></span>
+            <br />Patient
+        </a>
+    </nav>
+
+    <h2>@Model.FName @Model.LName</h2>
+    <div>Patient ID is: @Model.PID</div>
+</div>

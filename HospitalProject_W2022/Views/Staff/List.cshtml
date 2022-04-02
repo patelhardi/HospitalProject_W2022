@@ -1,0 +1,20 @@
+﻿@model IEnumerable<HospitalProject_W2022.Models.StaffsDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<div>
+    <a href="/Staff/New" class="btn btn-dblue btn-lg" role="button">
+        <span class="glyphicon glyphicon-user glyphsize"></span>
+        <br />New
+        <span class="glyphicon glyphicon-plus green"></span>
+        <br />Staff
+    </a>
+</div>
+
+<h2>List of Staffs</h2>
+@foreach (var staff in Model)
+{
+    <div><a href="/Staff/Details/@staff.SID">Staff Name: @staff.FName @staff.LName</a></div>
+}
+

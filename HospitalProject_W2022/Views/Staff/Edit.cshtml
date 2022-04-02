@@ -1,0 +1,41 @@
+﻿@model HospitalProject_W2022.Models.ViewModels.UpdateStaff
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update Staff</h2>
+
+<div>
+    <a href="/Staff/List" class="btn btn-dblue btn-lg" role="button">
+        <span class="glyphicon glyphicon-arrow-left"></span> Back to
+        <br />the Staff list
+    </a>
+</div>
+
+<form method="POST" action="/Staff/Update/@Model.SelectedStaff.SID" enctype="multipart/form-data" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
+    <div style="display:none;">
+        <label>Staff ID:</label>
+        @* Pass through the appointment ID *@
+        <input type="text" name="SID" value="@Model.SelectedStaff.SID" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    </div>
+    <div>
+        <label>First Name:</label>
+        <input type="text" name="FName" value="@Model.SelectedStaff.FName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    </div>
+    <div>
+        <label>Last Name:</label>
+        <input type="text" name="LName" value="@Model.SelectedStaff.LName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    </div>
+    <div>
+        <label>Date of birth:</label>
+        <input type="text" name="DOB" value="@Model.SelectedStaff.DOB" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    </div>
+    <div>
+        <label>Contact</label>
+        <input type="number" name="Contact" value="@Model.SelectedStaff.Contact" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    </div>
+    <div>
+        <input type="submit" value="Update Staff" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
+    </div>
+</form>
+

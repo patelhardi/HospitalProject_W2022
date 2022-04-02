@@ -1,0 +1,19 @@
+﻿@model IEnumerable<HospitalProject_W2022.Models.PatientsDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>All Patients Infomation</h2>
+
+<a href="/patient/new" class="btn btn-lg" role="button">
+    <span class="glyphicon glyphicon-home glyphsize"></span>
+    <br />Add New Patient
+</a>
+
+<ul>
+    @foreach (var patient in Model)
+    {
+        <li><a href="/patient/details/@patient.PID">Patient ID: @patient.PID | @patient.FName @patient.LName</a></li>
+    }
+</ul>
+

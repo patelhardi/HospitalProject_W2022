@@ -1,0 +1,21 @@
+﻿@model HospitalProject_W2022.Models.StaffsDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Do you want to Delete @Model.FName @Model.LName ?</h2>
+
+<a href="/Staff/List" class="btn btn-dblue btn-lg" role="button">
+    <span class="glyphicon glyphicon-arrow-left"></span> Back to
+    <br />the Staff list
+</a>
+
+<br />
+
+<div>
+    <form action="/Staff/Delete/@Model.SID" method="POST" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
+        <input type="submit" value="Delete" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
+    </form>
+</div>
+
+

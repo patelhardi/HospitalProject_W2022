@@ -1,0 +1,35 @@
+﻿@model HospitalProject_W2022.Models.StaffsDto
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <nav>
+        <!-- Back to appointment's list -->
+        <a href="/Staff/List" class="btn btn-dblue btn-lg" role="button">
+            <span class="glyphicon glyphicon-arrow-left"></span> Back to
+            <br />the Staff list
+        </a>
+        <!-- Update appointment button -->
+        <a href="/Staff/Edit/@Model.SID" class="btn btn-dblue btn-lg" role="button">
+            <span class="glyphicon glyphicon-user glyphsize"></span>
+            <br />Update
+            <span class="glyphicon glyphicon-edit"></span>
+            <br />Staff
+        </a>
+        <!-- Delete appointment button -->
+        <a href="/Staff/DeleteConfirm/@Model.SID" class="btn btn-dblue btn-lg" role="button">
+            <span class="glyphicon glyphicon-user glyphsize"></span>
+            <br />Delete
+            <span class="glyphicon glyphicon-minus"></span>
+            <br />Staff
+        </a>
+    </nav>
+</div>
+
+<h2>Staff Details</h2>
+<ul>
+    <li>Staff Id: @Model.SID</li>
+    <li>Name: @Model.FName @Model.LName</li>
+    <li>Date of birth: @Model.DOB</li>
+</ul>
