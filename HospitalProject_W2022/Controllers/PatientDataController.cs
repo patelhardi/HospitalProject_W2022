@@ -40,8 +40,6 @@ namespace HospitalProject_W2022.Controllers
         // GET: api/PatientData/5
         [ResponseType(typeof(Patient))]
         [HttpGet]
-        [Authorize(Roles = "Admin")]
-
         public IHttpActionResult FindPatient(int id)
         {
             Patient Patient = db.Patients.Find(id);
@@ -67,23 +65,15 @@ namespace HospitalProject_W2022.Controllers
         // PUT: api/PatientData/5
         [ResponseType(typeof(void))]
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public IHttpActionResult UpdatePatient(int id, Patient patient)
         {
-            Debug.WriteLine("debug>>>reached update patient method.");
             if (!ModelState.IsValid)
             {
-                Debug.WriteLine("debug>>>model state is invalid");
-
                 return BadRequest(ModelState);
             }
 
             if (id != patient.PID)
             {
-                Debug.WriteLine("debug>>>id mismatch!");
-                Debug.WriteLine("Get parameter" + id);
-                Debug.WriteLine("Post parameter" + patient.PID);
-
                 return BadRequest();
             }
 
@@ -97,8 +87,6 @@ namespace HospitalProject_W2022.Controllers
             {
                 if (!PatientExists(id))
                 {
-                    Debug.WriteLine("debug>>>patient not found.");
-
                     return NotFound();
                 }
                 else
@@ -107,14 +95,12 @@ namespace HospitalProject_W2022.Controllers
                 }
             }
 
-            Debug.WriteLine("debug>>>none of the conditions trigger.");
             return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/PatientData
         [ResponseType(typeof(Patient))]
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public IHttpActionResult AddPatient(Patient patient)
         {
             if (!ModelState.IsValid)
@@ -131,7 +117,6 @@ namespace HospitalProject_W2022.Controllers
         // DELETE: api/PatientData/5
         [ResponseType(typeof(Patient))]
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public IHttpActionResult DeletePatient(int id)
         {
             Patient patient = db.Patients.Find(id);

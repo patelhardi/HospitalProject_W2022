@@ -92,7 +92,6 @@ namespace HospitalProject_W2022.Controllers
         }
 
         // GET: Patient/New
-        [Authorize(Roles = "Admin")]
         public ActionResult New()
         {
             return View();
@@ -100,7 +99,6 @@ namespace HospitalProject_W2022.Controllers
 
         // POST: Patient/Create
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public ActionResult Create(Patient patient)
         {
             GetApplicationCookie();
@@ -130,7 +128,6 @@ namespace HospitalProject_W2022.Controllers
         }
 
         // GET: Patient/Edit/5
-        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             GetApplicationCookie();
@@ -145,7 +142,6 @@ namespace HospitalProject_W2022.Controllers
 
         // POST: Patient/Update/5
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public ActionResult Update(int id, Patient patient)
         {
             GetApplicationCookie();
@@ -171,7 +167,6 @@ namespace HospitalProject_W2022.Controllers
         }
 
         // GET: Patient/Delete/5
-        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirm(int id)
         {
             GetApplicationCookie();
@@ -186,7 +181,6 @@ namespace HospitalProject_W2022.Controllers
 
         // POST: Patient/Delete/5
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             GetApplicationCookie();

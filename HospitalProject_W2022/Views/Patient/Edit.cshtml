@@ -1,16 +1,42 @@
 ﻿@model HospitalProject_W2022.Models.PatientsDto
+
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Update a patient</h2>
+<h2>Update Patient</h2>
 
-<form action="/patient/Update/@Model.PID" method="post">
-    <div>
-        <label>Patient Name:</label> <input type="text" name="FName" />
+<div>
+    <a href="/Patient/List" class="btn btn-dblue btn-lg" role="button">
+        <span class="glyphicon glyphicon-arrow-left"></span> Back to
+        <br />the Patient list
+    </a>
+</div>
+
+<form method="POST" action="/Patient/Update/@Model.PID" enctype="multipart/form-data" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
+    <div style="display:none;">
+        <label>Patient ID:</label>
+        @* Pass through the appointment ID *@
+        <input type="text" name="PID" value="@Model.PID" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
-    <input type="hidden" name="PID" value="@Model.PID" />
     <div>
-        <input type="submit" value="Update Patient" />
+        <label>First Name:</label>
+        <input type="text" name="FName" value="@Model.FName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    </div>
+    <div>
+        <label>Last Name:</label>
+        <input type="text" name="LName" value="@Model.LName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    </div>
+    <div>
+        <label>Date of birth:</label>
+        <input type="text" name="DOB" value="@Model.DOB" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    </div>
+    <div>
+        <label>Contact</label>
+        <input type="number" name="Contact" value="@Model.Contact" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    </div>
+    <div>
+        <input type="submit" value="Update Patient" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
     </div>
 </form>
+
