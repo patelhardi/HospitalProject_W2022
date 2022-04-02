@@ -61,6 +61,7 @@ namespace HospitalProject_W2022.Controllers
         }
 
         // GET: Department/List
+        [Authorize(Roles = "Admin")]
         public ActionResult List()
         {
             GetApplicationCookie();
@@ -78,6 +79,8 @@ namespace HospitalProject_W2022.Controllers
         }
 
         // GET: Department/Details/5
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Details(int id)
         {
             GetApplicationCookie();
