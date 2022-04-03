@@ -85,11 +85,7 @@ namespace HospitalProject_W2022.Controllers
         // GET: Staff/New
         public ActionResult New()
         {
-            //need staff information for staff dropdown
-            string url = "/ListStaffs";
-            HttpResponseMessage response = client.GetAsync(url).Result;
-            IEnumerable<StaffsDto> staffOptions = response.Content.ReadAsAsync<IEnumerable<StaffsDto>>().Result;
-            return View(staffOptions);
+            return View();
         }
 
         /// <summary>
