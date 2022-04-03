@@ -5,8 +5,7 @@
 
 <h2>Are you sure you want to delete this patient?</h2>
 <a href="/patient/List">Cancel</a>
-<h2>@Model.FName</h2>
-<div>id: @Model.PID </div>
+<h2>@Model.FName @Model.LName</h2>
 <form action="/patient/Delete/@Model.PID" method="POST">
     <input type="submit" value="Confirm Delete" />
 
