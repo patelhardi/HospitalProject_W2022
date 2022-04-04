@@ -18,7 +18,7 @@ namespace HospitalProject_W2022.Controllers
         static AppointmentController()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44377/api/AppointmentData/");
+            client.BaseAddress = new Uri("https://localhost:44377/api/");
         }
 
         /// <summary>
@@ -29,23 +29,7 @@ namespace HospitalProject_W2022.Controllers
         // GET: Appointment/List
         public ActionResult List()
         {
-            string url = "ListAppointments";
-            HttpResponseMessage response = client.GetAsync(url).Result;
-
-            IEnumerable<AppointmentDto> appointmentDtos = response.Content.ReadAsAsync<IEnumerable<AppointmentDto>>().Result;
-            return View(appointmentDtos);
-        }
-
-        /// <summary>
-        /// Display list of all appointments as per patient id
-        /// select * from appointment where patient id = 1
-        /// </summary>
-        /// <param name="id">patient id passing parameter</param>
-        /// <returns>List of all appointments as per patient id</returns>
-        // GET: Appointment/ListByPatient/5
-        public ActionResult ListByPatient(int id)
-        {
-            string url = "ListAppointmentsByPatient/" + id;
+            string url = "AppointmentData/ListAppointments";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             IEnumerable<AppointmentDto> appointmentDtos = response.Content.ReadAsAsync<IEnumerable<AppointmentDto>>().Result;
@@ -61,7 +45,7 @@ namespace HospitalProject_W2022.Controllers
         // GET: Appointment/Details/5
         public ActionResult Details(int id)
         {
-            string url = "FindAppointment/" + id;
+            string url = "AppointmentData/FindAppointment/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             AppointmentDto selectedAppointmentDto = response.Content.ReadAsAsync<AppointmentDto>().Result;
@@ -86,7 +70,7 @@ namespace HospitalProject_W2022.Controllers
         public ActionResult New()
         {
             //need patient information for patient dropdown
-            string url = "ListPatients";
+            string url = "PatientData/ListPatients";
             HttpResponseMessage response = client.GetAsync(url).Result;
             IEnumerable<PatientDto> patientOptions = response.Content.ReadAsAsync<IEnumerable<PatientDto>>().Result;
             return View(patientOptions);
@@ -102,7 +86,7 @@ namespace HospitalProject_W2022.Controllers
         [HttpPost]
         public ActionResult Create(Appointment appointment)
         {
-            string url = "AddAppointment";
+            string url = "AppointmentData/AddAppointment";
 
             string jsonpayload = jss.Serialize(appointment);
 
@@ -131,13 +115,13 @@ namespace HospitalProject_W2022.Controllers
             UpdateAppointment viewModel = new UpdateAppointment();
 
             //selected appointment information
-            string url = "FindAppointment/" + id;
+            string url = "AppointmentData/FindAppointment/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             AppointmentDto selectedAppointmentDto = response.Content.ReadAsAsync<AppointmentDto>().Result;
             viewModel.SelectedAppointment = selectedAppointmentDto;
 
             //list of staff dropdown 
-            url = "ListPatients";
+            url = "PatientData/ListPatients";
             response = client.GetAsync(url).Result;
             IEnumerable<PatientDto> patientOptions = response.Content.ReadAsAsync<IEnumerable<PatientDto>>().Result;
             viewModel.PatientOptions = patientOptions;
@@ -156,7 +140,7 @@ namespace HospitalProject_W2022.Controllers
         [HttpPost]
         public ActionResult Update(int id, Appointment appointment)
         {
-            string url = "UpdateAppointment/" + id;
+            string url = "AppointmentData/UpdateAppointment/" + id;
 
             string jsonpayload = jss.Serialize(appointment);
 
@@ -182,7 +166,7 @@ namespace HospitalProject_W2022.Controllers
         // GET: Appointment/DeleteConfirm/5
         public ActionResult DeleteConfirm(int id)
         {
-            string url = "FindAppointment/" + id;
+            string url = "AppointmentData/FindAppointment/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             AppointmentDto selectedAppointmentDto = response.Content.ReadAsAsync<AppointmentDto>().Result;
@@ -199,7 +183,7 @@ namespace HospitalProject_W2022.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            string url = "DeleteAppointment/" + id;
+            string url = "AppointmentData/DeleteAppointment/" + id;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
 

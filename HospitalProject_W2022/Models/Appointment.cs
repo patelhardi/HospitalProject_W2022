@@ -29,11 +29,4 @@ namespace HospitalProject_W2022.Models
         public string LName { get; set; }
         public int PID { get; set; }
     }
-
-    public class PatientDto
-    {
-        public string FName { get; set; }
-        public string LName { get; set; }
-        public int PID { get; set; }
-    }
 }

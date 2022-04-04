@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HospitalProject_W2022.Models.StaffDto>
+﻿
 @{
     ViewBag.Title = "New";
 }
@@ -14,17 +14,8 @@
 
 <form action="/Shift/Create" method="POST" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
     <div>
-        <label style="padding: 12px 12px 12px 0; display: inline-block;">Staff Member:</label>
-        <select name="SID" style="padding: 12px 12px 12px 0; display: inline-block;">
-            @foreach (var staff in Model)
-            {
-                <option value="@staff.SID">@staff.FName @staff.LName</option>
-            }
-        </select>
-    </div>
-    <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Date:</label>
-        <input type="date" min="" name="date" id="myDate" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <input type="date" name="date" id="myDate" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Type:</label>

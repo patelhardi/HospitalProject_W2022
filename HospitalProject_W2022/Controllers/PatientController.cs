@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using HospitalProject_W2022.Models.ViewModels;
 
 namespace HospitalProject_W2022.Controllers
 {
@@ -18,22 +19,22 @@ namespace HospitalProject_W2022.Controllers
 
         static PatientController()
         {
-            HttpClientHandler handler = new HttpClientHandler()
+            /*HttpClientHandler handler = new HttpClientHandler()
             {
                 AllowAutoRedirect = false,
                 //cookies are manually set in RequestHeader
                 UseCookies = false
-            };
+            };*/
 
-            client = new HttpClient(handler);
-            Debug.WriteLine(client);
+            client = new HttpClient();
+            //Debug.WriteLine(client);
 
-            client.BaseAddress = new Uri("https://localhost:44377/api/patientdata/");
-            Debug.WriteLine(client.BaseAddress);
+            client.BaseAddress = new Uri("https://localhost:44377/api/");
+            //Debug.WriteLine(client.BaseAddress);
 
         }
 
-        private void GetApplicationCookie()
+        /*private void GetApplicationCookie()
         {
             string token = "";
             //HTTP client is set up to be reused, otherwise it will exhaust server resources.
@@ -51,20 +52,20 @@ namespace HospitalProject_W2022.Controllers
             if (token != "") client.DefaultRequestHeaders.Add("Cookie", ".AspNet.ApplicationCookie=" + token);
 
             return;
-        }
+        }*/
 
         // GET: Patient/List
         public ActionResult List()
         {
-            GetApplicationCookie();
+            //GetApplicationCookie();
             //curl https://localhost:44377/api/patientdata/listpatients
-            string url = "listpatients";
+            string url = "patientdata/ListPatients";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            Debug.WriteLine("the response code is >>" + response.StatusCode);
+            //Debug.WriteLine("the response code is >>" + response.StatusCode);
 
-            IEnumerable<PatientsDto> patient = response.Content.ReadAsAsync<IEnumerable<PatientsDto>>().Result;
-            Debug.WriteLine("(controller)number of patients received >>");
+            IEnumerable<PatientDto> patient = response.Content.ReadAsAsync<IEnumerable<PatientDto>>().Result;
+            //Debug.WriteLine("(controller)number of patients received >>");
 
             return View(patient);
         }
@@ -72,18 +73,25 @@ namespace HospitalProject_W2022.Controllers
         // GET: Patient/Details/5
         public ActionResult Details(int id)
         {
-            GetApplicationCookie();
+            DetailsPatient viewModel = new DetailsPatient();
+            //GetApplicationCookie();
             //curl https://localhost:44377/api/patientdata/findPatient/{id}
-            string url = "findPatient/" + id;
+            string url = "patientdata/FindPatient/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            Debug.WriteLine("the response code is >>" + response.StatusCode);
+            //Debug.WriteLine("the response code is >>" + response.StatusCode);
 
-            PatientsDto selectedPatient = response.Content.ReadAsAsync<PatientsDto>().Result;
-            Debug.WriteLine("patients received >>");
-            Debug.WriteLine(selectedPatient.FName);
+            PatientDto selectedPatient = response.Content.ReadAsAsync<PatientDto>().Result;
+            viewModel.SelectedPatient = selectedPatient;
+            //Debug.WriteLine("patients received >>");
+            //Debug.WriteLine(selectedPatient.FName);
 
-            return View(selectedPatient);
+            url = "AppointmentData/ListAppointmentsByPatient/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<AppointmentDto> relatedAppointments = response.Content.ReadAsAsync<IEnumerable<AppointmentDto>>().Result;
+
+            viewModel.RelatedAppointments = relatedAppointments;
+            return View(viewModel);
         }
 
         public ActionResult Error()
@@ -101,12 +109,12 @@ namespace HospitalProject_W2022.Controllers
         [HttpPost]
         public ActionResult Create(Patient patient)
         {
-            GetApplicationCookie();
+            //GetApplicationCookie();
 
-            System.Diagnostics.Debug.WriteLine("the jsonpatlaod is: ");
+            //System.Diagnostics.Debug.WriteLine("the jsonpatlaod is: ");
             // add new patient into system using the API
             //curl -H "Content-Type:application/json" -d @patient.json https://localhost:44377/api/patientdata/addpatient
-            string url = "addpatient";
+            string url = "patientdata/AddPatient";
 
             string jsonpayload = jss.Serialize(patient);
             System.Diagnostics.Debug.WriteLine(jsonpayload);
@@ -130,12 +138,12 @@ namespace HospitalProject_W2022.Controllers
         // GET: Patient/Edit/5
         public ActionResult Edit(int id)
         {
-            GetApplicationCookie();
+            //GetApplicationCookie();
 
-            string url = "findPatient/" + id;
+            string url = "patientdata/FindPatient/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            PatientsDto selectedPatient = response.Content.ReadAsAsync<PatientsDto>().Result;
+            PatientDto selectedPatient = response.Content.ReadAsAsync<PatientDto>().Result;
 
             return View(selectedPatient);
         }
@@ -144,12 +152,12 @@ namespace HospitalProject_W2022.Controllers
         [HttpPost]
         public ActionResult Update(int id, Patient patient)
         {
-            GetApplicationCookie();
+            //GetApplicationCookie();
 
-            string url = "updatepatient/" + id;
+            string url = "patientdata/UpdatePatient/" + id;
 
             string jsonpayload = jss.Serialize(patient);
-            System.Diagnostics.Debug.WriteLine(jsonpayload);
+            //System.Diagnostics.Debug.WriteLine(jsonpayload);
 
             HttpContent content = new StringContent(jsonpayload);
             content.Headers.ContentType.MediaType = "application/json";
@@ -166,15 +174,15 @@ namespace HospitalProject_W2022.Controllers
             }
         }
 
-        // GET: Patient/Delete/5
+        // GET: Patient/DeleteConfirm/5
         public ActionResult DeleteConfirm(int id)
         {
-            GetApplicationCookie();
+            //GetApplicationCookie();
 
-            string url = "findPatient/" + id;
+            string url = "patientdata/FindPatient/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            PatientsDto selectedPatient = response.Content.ReadAsAsync<PatientsDto>().Result;
+            PatientDto selectedPatient = response.Content.ReadAsAsync<PatientDto>().Result;
 
             return View(selectedPatient);
         }
@@ -183,9 +191,9 @@ namespace HospitalProject_W2022.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            GetApplicationCookie();
+            //GetApplicationCookie();
 
-            string url = "deletepatient/" + id;
+            string url = "patientdata/DeletePatient/" + id;
 
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";

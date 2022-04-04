@@ -24,11 +24,66 @@ namespace HospitalProject_W2022.Controllers
         // GET: api/StaffData/ListStaffs
         [HttpGet]
         [Route("api/StaffData/ListStaffs")]
-        public IEnumerable<StaffsDto> ListStaffs()
+        public IEnumerable<StaffDto> ListStaffs()
         {
             List<Staff> staffs = db.Staffs.OrderBy(s => s.SID).ToList();
-            List<StaffsDto> staffDtos = new List<StaffsDto>();
-            staffs.ForEach(s => staffDtos.Add(new StaffsDto()
+            List<StaffDto> staffDtos = new List<StaffDto>();
+            staffs.ForEach(s => staffDtos.Add(new StaffDto()
+            {
+                SID = s.SID,
+                FName = s.FName,
+                LName = s.LName,
+                DOB = s.DOB,
+                Contact = s.Contact,
+                DName = s.Department.DName,
+                DID = s.DID
+            }));
+            return staffDtos;
+        }
+
+        /// <summary>
+        /// Display List of all staff for perticular department
+        /// </summary>
+        /// <param name="id">passing department id parameter</param>
+        /// <returns>List of staffs with department name for perticular department</returns>
+        // GET: api/StaffData/ListStaffsByDepartment/5
+        [HttpGet]
+        [Route("api/StaffData/ListStaffsByDepartment/{id}")]
+        public IEnumerable<StaffDto> ListStaffsByDepartment(int id)
+        {
+            List<Staff> staffs = db.Staffs.Where(
+                s => s.Department.DID == id).ToList();
+            List<StaffDto> staffDtos = new List<StaffDto>();
+            staffs.ForEach(s => staffDtos.Add(new StaffDto()
+            {
+                SID = s.SID,
+                FName = s.FName,
+                LName = s.LName,
+                DOB = s.DOB,
+                Contact = s.Contact,
+                DName = s.Department.DName,
+                DID = s.DID
+            }));
+            return staffDtos;
+        }
+
+        /// <summary>
+        /// display list of staffs in perticular shift
+        /// </summary>
+        /// <param name="id">passing parameter shift id</param>
+        /// <returns>list of staffs</returns>
+        // GET: api/StaffData/ListStaffsForShift/1
+        [HttpGet]
+        [ResponseType(typeof(StaffDto))]
+        public IHttpActionResult ListStaffsForShift(int id)
+        {
+            List<Staff> Staffs = db.Staffs.Where(
+                s => s.shifts.Any(
+                    sh => sh.SHID == id
+            )).ToList();
+            List<StaffDto> StaffDtos = new List<StaffDto>();
+
+            Staffs.ForEach(s => StaffDtos.Add(new StaffDto()
             {
                 SID = s.SID,
                 FName = s.FName,
@@ -37,9 +92,34 @@ namespace HospitalProject_W2022.Controllers
                 Contact = s.Contact,
                 DID = s.DID
             }));
-            return staffDtos;
+            return Ok(StaffDtos);
         }
 
+        /// <summary>
+        /// display list of staffs that are not in perticular shift
+        /// </summary>
+        /// <param name="id">passing parameter shift id</param>
+        /// <returns>list of staffs</returns>
+        // GET: api/StaffData/ListStaffsNotInPerticularShift/1
+        [HttpGet]
+        public IHttpActionResult ListStaffsNotInPerticularShift(int id)
+        {
+            List<Staff> Staffs = db.Staffs.Where(
+                s => !s.shifts.Any(
+                    sh => sh.SHID == id
+            )).OrderBy(s => s.FName).ToList();
+            List<StaffDto> StaffDtos = new List<StaffDto>();
+            Staffs.ForEach(s => StaffDtos.Add(new StaffDto()
+            {
+                SID = s.SID,
+                FName = s.FName,
+                LName = s.LName,
+                DOB = s.DOB,
+                Contact = s.Contact,
+                DID = s.DID
+            }));
+            return Ok(StaffDtos); ;
+        }
 
         /// <summary>
         /// display result of perticular staff
@@ -55,7 +135,7 @@ namespace HospitalProject_W2022.Controllers
             //Debug.WriteLine("id:" + id);
             Staff staff = db.Staffs.Find(id);
             //Debug.WriteLine(staff);
-            StaffsDto staffDto = new StaffsDto()
+            StaffDto staffDto = new StaffDto()
             {
 
                 SID = staff.SID,
@@ -63,6 +143,7 @@ namespace HospitalProject_W2022.Controllers
                 LName = staff.LName,
                 DOB = staff.DOB,
                 Contact = staff.Contact,
+                DName = staff.Department.DName,
                 DID = staff.DID
             };
             if (staff == null)

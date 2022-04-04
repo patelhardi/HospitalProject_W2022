@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Mvc;
 using System.Web.Http.Description;
 using HospitalProject_W2022.Models;
+using HospitalProject_W2022.Models.ViewModels;
 using System.Web.Script.Serialization;
 using System.Web;
 using System.Diagnostics;
@@ -35,7 +36,7 @@ namespace HospitalProject_W2022.Controllers
             client = new HttpClient(handler);
             Debug.WriteLine(client);
 
-            client.BaseAddress = new Uri("https://localhost:44377/api/departmentdata/");
+            client.BaseAddress = new Uri("https://localhost:44377/api/");
             Debug.WriteLine(client.BaseAddress);
 
         }
@@ -66,7 +67,7 @@ namespace HospitalProject_W2022.Controllers
         {
             GetApplicationCookie();
             //curl https://localhost:44377/api/departmentdata/listdepartments
-            string url = "listdepartments";
+            string url = "departmentdata/listdepartments";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             Debug.WriteLine("the response code is >>" + response.StatusCode);
@@ -84,17 +85,26 @@ namespace HospitalProject_W2022.Controllers
         public ActionResult Details(int id)
         {
             GetApplicationCookie();
-            //curl https://localhost:44377/api/departmentdata/findDepartment/{id}
-            string url = "findDepartment/" + id;
+
+            DetailsDepartment viewModel = new DetailsDepartment();
+            //GetApplicationCookie();
+            //curl https://localhost:44377/api/patientdata/findPatient/{id}
+            string url = "departmentdata/findDepartment/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            Debug.WriteLine("the response code is >>" + response.StatusCode);
+            //Debug.WriteLine("the response code is >>" + response.StatusCode);
 
             DepartmentDto selectedDepartment = response.Content.ReadAsAsync<DepartmentDto>().Result;
-            Debug.WriteLine("departments received >>");
-            Debug.WriteLine(selectedDepartment.DName);
+            viewModel.SelectedDepartment = selectedDepartment;
+            //Debug.WriteLine("patients received >>");
+            //Debug.WriteLine(selectedPatient.FName);
 
-            return View(selectedDepartment);
+            url = "StaffData/ListStaffsByDepartment/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<StaffDto> relatedStaffs = response.Content.ReadAsAsync<IEnumerable<StaffDto>>().Result;
+
+            viewModel.RelatedStaffs = relatedStaffs;
+            return View(viewModel);
         }
 
         public ActionResult Error()
@@ -119,7 +129,7 @@ namespace HospitalProject_W2022.Controllers
             System.Diagnostics.Debug.WriteLine("the jsonpatlaod is: ");
             // add new department into system using the API
             //curl -H "Content-Type:application/json" -d @department.json https://localhost:44377/api/departmentdata/adddepartment
-            string url = "adddepartment";
+            string url = "departmentdata/adddepartment";
 
             string jsonpayload = jss.Serialize(department);
             System.Diagnostics.Debug.WriteLine(jsonpayload);
@@ -146,7 +156,7 @@ namespace HospitalProject_W2022.Controllers
         {
             GetApplicationCookie();
 
-            string url = "findDepartment/" + id;
+            string url = "departmentdata/findDepartment/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             DepartmentDto selectedDepartment = response.Content.ReadAsAsync<DepartmentDto>().Result;
@@ -161,7 +171,7 @@ namespace HospitalProject_W2022.Controllers
         {
             GetApplicationCookie();
 
-            string url = "updatedepartment/" + id;
+            string url = "departmentdata/updatedepartment/" + id;
 
             string jsonpayload = jss.Serialize(department);
             System.Diagnostics.Debug.WriteLine(jsonpayload);
@@ -187,7 +197,7 @@ namespace HospitalProject_W2022.Controllers
         {
             GetApplicationCookie();
 
-            string url = "findDepartment/" + id;
+            string url = "departmentdata/findDepartment/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             DepartmentDto selectedDepartment = response.Content.ReadAsAsync<DepartmentDto>().Result;
@@ -202,7 +212,7 @@ namespace HospitalProject_W2022.Controllers
         {
             GetApplicationCookie();
 
-            string url = "deletedepartment/" + id;
+            string url = "departmentdata/deletedepartment/" + id;
 
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";

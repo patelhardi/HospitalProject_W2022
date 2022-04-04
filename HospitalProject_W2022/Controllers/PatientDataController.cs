@@ -17,14 +17,15 @@ namespace HospitalProject_W2022.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/PatientData
+        // GET: api/PatientData/ListPatients
         [HttpGet]
-        public IEnumerable<PatientsDto> ListPatients()
+        [Route("api/PatientData/ListPatients")]
+        public IEnumerable<PatientDto> ListPatients()
         {
             List<Patient> patients = db.Patients.OrderBy(p => p.PID).ToList();
-            List<PatientsDto> patientDtos = new List<PatientsDto>();
+            List<PatientDto> patientDtos = new List<PatientDto>();
 
-            patients.ForEach(p => patientDtos.Add(new PatientsDto()
+            patients.ForEach(p => patientDtos.Add(new PatientDto()
             {
                 PID = p.PID,
                 FName = p.FName,
@@ -37,13 +38,14 @@ namespace HospitalProject_W2022.Controllers
             return patientDtos;
         }
 
-        // GET: api/PatientData/5
+        // GET: api/PatientData/FindPatient/5
         [ResponseType(typeof(Patient))]
         [HttpGet]
+        [Route("api/PatientData/FindPatient/{id}")]
         public IHttpActionResult FindPatient(int id)
         {
             Patient Patient = db.Patients.Find(id);
-            PatientsDto PatientsDto = new PatientsDto()
+            PatientDto PatientsDto = new PatientDto()
             {
                 PID = Patient.PID,
                 FName = Patient.FName,
@@ -62,7 +64,7 @@ namespace HospitalProject_W2022.Controllers
             return Ok(PatientsDto);
         }
 
-        // PUT: api/PatientData/5
+        // POST: api/PatientData/UpdatePatient/5
         [ResponseType(typeof(void))]
         [HttpPost]
         public IHttpActionResult UpdatePatient(int id, Patient patient)
@@ -98,7 +100,7 @@ namespace HospitalProject_W2022.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/PatientData
+        // POST: api/PatientData/AddPatient
         [ResponseType(typeof(Patient))]
         [HttpPost]
         public IHttpActionResult AddPatient(Patient patient)
@@ -114,7 +116,7 @@ namespace HospitalProject_W2022.Controllers
             return CreatedAtRoute("DefaultApi", new { id = patient.PID }, patient);
         }
 
-        // DELETE: api/PatientData/5
+        // POST: api/PatientData/DeletePatient/5
         [ResponseType(typeof(Patient))]
         [HttpPost]
         public IHttpActionResult DeletePatient(int id)

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "New";
 }
 
 <div>
@@ -10,30 +10,30 @@
 </div>
 
 <h2>Add a New Patient</h2>
-<form action="/patient/Create" method="post" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
+<form action="/patient/Create" method="POST" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">First Name:</label>
-        <input type="text" name="FName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <input type="text" name="FName" id="FName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Last Name:</label>
-        <input type="text" name="LName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"  />
+        <input type="text" name="LName" id="LName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"  />
     </div>
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Health Card:</label>
-        <input type="text" name="HC" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"  />
+        <input type="text" name="HC" id="HC" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"  />
     </div>
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Date of birth:</label>
-        <input type="date" name="DOB"  style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <input type="date" name="DOB" id="DOB" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Address:</label>
-        <input type="text" name="Address"  style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <input type="text" name="Address" id="Address" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Contact:</label>
-        <input type="number" name="Contact"  style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <input type="number" name="Contact" id="Contact" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
     <div>
         <input type="submit" value="Add Patient" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />

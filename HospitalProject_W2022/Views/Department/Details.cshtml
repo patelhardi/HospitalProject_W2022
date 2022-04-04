@@ -1,6 +1,6 @@
-﻿@model HospitalProject_W2022.Models.DepartmentDto
+﻿@model HospitalProject_W2022.Models.ViewModels.DetailsDepartment
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "Details";
 }
 
 <div id="containershow">
@@ -11,14 +11,14 @@
             <br />the Department list
         </a>
         <!-- Update department button -->
-        <a href="/department/edit/@Model.DID" class="btn btn-dblue btn-lg" role="button">
+        <a href="/department/edit/@Model.SelectedDepartment.DID" class="btn btn-dblue btn-lg" role="button">
             <span class="glyphicon glyphicon-home glyphsize"></span>
             <br />Update
             <span class="glyphicon glyphicon-edit"></span>
             <br />Department
         </a>
         <!-- Delete department button -->
-        <a style="color:#ab2020;" href="/department/deleteconfirm/@Model.DID" class="btn btn-dblue btn-lg" role="button">
+        <a style="color:#ab2020;" href="/department/deleteconfirm/@Model.SelectedDepartment.DID" class="btn btn-dblue btn-lg" role="button">
             <span class="glyphicon glyphicon-home glyphsize"></span>
             <br />Delete
             <span class="glyphicon glyphicon-minus"></span>
@@ -26,6 +26,15 @@
         </a>
     </nav>
 
-    <h2>@Model.DName</h2>
-    <div>Department ID is: @Model.DID</div>
+    <h2>@Model.SelectedDepartment.DName</h2>
+    <div>Department ID is: @Model.SelectedDepartment.DID</div>
+</div>
+
+<div>
+    <h3>List of Staffs for @Model.SelectedDepartment.DName Department</h3>
+    @foreach (var staff in Model.RelatedStaffs)
+    {
+        <a href="/Staff/Details/@staff.SID">@staff.FName @staff.LName</a>
+        <br />
+    }
 </div>

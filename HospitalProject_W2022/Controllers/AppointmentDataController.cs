@@ -44,26 +44,6 @@ namespace HospitalProject_W2022.Controllers
         }
 
         /// <summary>
-        /// display list of all patients
-        /// </summary>
-        /// <returns>Display list of patients with name</returns>
-        // GET: api/AppointmentData/ListPatients
-        [HttpGet]
-        [Route("api/AppointmentData/ListPatients")]
-        public IEnumerable<PatientDto> ListPatients()
-        {
-            List<Patient> patients = db.Patients.OrderBy(p => p.FName).ToList();
-            List<PatientDto> patientDtos = new List<PatientDto>();
-            patients.ForEach(p => patientDtos.Add(new PatientDto()
-            {
-                PID = p.PID,
-                FName = p.FName,
-                LName = p.LName
-            }));
-            return patientDtos;
-        }
-
-        /// <summary>
         /// Display List of all appointments for perticular patient
         /// </summary>
         /// <param name="id">passing patient id parameter</param>

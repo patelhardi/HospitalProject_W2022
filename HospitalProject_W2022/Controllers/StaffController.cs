@@ -18,7 +18,7 @@ namespace HospitalProject_W2022.Controllers
         static StaffController()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44377/api/StaffData/");
+            client.BaseAddress = new Uri("https://localhost:44377/api/");
         }
 
         /// <summary>
@@ -29,26 +29,10 @@ namespace HospitalProject_W2022.Controllers
         // GET: Staff/List
         public ActionResult List()
         {
-            string url = "ListStaffs";
+            string url = "StaffData/ListStaffs";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            IEnumerable<StaffsDto> staffDtos = response.Content.ReadAsAsync<IEnumerable<StaffsDto>>().Result;
-            return View(staffDtos);
-        }
-
-        /// <summary>
-        /// Display list of all staffs as per staff id
-        /// select * from staff where staff id = 1
-        /// </summary>
-        /// <param name="id">staff id passing parameter</param>
-        /// <returns>List of all staffs as per staff id</returns>
-        // GET: Staff/ListByStaff/5
-        public ActionResult ListByStaff(int id)
-        {
-            string url = "ListStaffsByStaff/" + id;
-            HttpResponseMessage response = client.GetAsync(url).Result;
-
-            IEnumerable<StaffsDto> staffDtos = response.Content.ReadAsAsync<IEnumerable<StaffsDto>>().Result;
+            IEnumerable<StaffDto> staffDtos = response.Content.ReadAsAsync<IEnumerable<StaffDto>>().Result;
             return View(staffDtos);
         }
 
@@ -61,11 +45,23 @@ namespace HospitalProject_W2022.Controllers
         // GET: Staff/Details/5
         public ActionResult Details(int id)
         {
-            string url = "FindStaff/" + id;
+            DetailsStaff viewModel = new DetailsStaff();
+
+            //communicate with datacontroller class
+            string url = "StaffData/FindStaff/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            StaffsDto selectedStaffsDto = response.Content.ReadAsAsync<StaffsDto>().Result;
-            return View(selectedStaffsDto);
+            StaffDto selectedStaffsDto = response.Content.ReadAsAsync<StaffDto>().Result;
+
+            viewModel.SelectedStaff = selectedStaffsDto;
+
+            url = "ShiftData/ListShiftForStaff/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<ShiftDto> KeptShifts = response.Content.ReadAsAsync<IEnumerable<ShiftDto>>().Result;
+
+            viewModel.KeptShifts = KeptShifts;
+
+            return View(viewModel);
         }
 
         /// <summary>
@@ -85,7 +81,10 @@ namespace HospitalProject_W2022.Controllers
         // GET: Staff/New
         public ActionResult New()
         {
-            return View();
+            string url = "DepartmentData/ListDepartments";
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            IEnumerable<DepartmentDto> departmentOptions = response.Content.ReadAsAsync<IEnumerable<DepartmentDto>>().Result;
+            return View(departmentOptions);
         }
 
         /// <summary>
@@ -98,7 +97,7 @@ namespace HospitalProject_W2022.Controllers
         [HttpPost]
         public ActionResult Create(Staff staff)
         {
-            string url = "AddStaff";
+            string url = "StaffData/AddStaff";
 
             string jsonpayload = jss.Serialize(staff);
 
@@ -127,16 +126,22 @@ namespace HospitalProject_W2022.Controllers
             UpdateStaff viewModel = new UpdateStaff();
 
             //selected staff information
-            string url = "FindStaff/" + id;
+            string url = "StaffData/FindStaff/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            StaffsDto selectedStaffsDto = response.Content.ReadAsAsync<StaffsDto>().Result;
+            StaffDto selectedStaffsDto = response.Content.ReadAsAsync<StaffDto>().Result;
             viewModel.SelectedStaff = selectedStaffsDto;
 
             //list of staff dropdown 
-            url = "ListStaffs";
+            url = "DepartmentData/ListDepartments";
             response = client.GetAsync(url).Result;
-            IEnumerable<StaffsDto> staffOptions = response.Content.ReadAsAsync<IEnumerable<StaffsDto>>().Result;
-            viewModel.StaffOptions = staffOptions;
+            IEnumerable<DepartmentDto> departmentOptions = response.Content.ReadAsAsync<IEnumerable<DepartmentDto>>().Result;
+            viewModel.DepartmentOptions = departmentOptions;
+
+            url = "ShiftData/ListShiftForStaff/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<ShiftDto> ShiftOptions = response.Content.ReadAsAsync<IEnumerable<ShiftDto>>().Result;
+
+            viewModel.ShiftOptions = ShiftOptions;
 
             return View(viewModel);
         }
@@ -152,7 +157,7 @@ namespace HospitalProject_W2022.Controllers
         [HttpPost]
         public ActionResult Update(int id, Staff staff)
         {
-            string url = "UpdateStaff/" + id;
+            string url = "StaffData/UpdateStaff/" + id;
 
             string jsonpayload = jss.Serialize(staff);
 
@@ -178,10 +183,10 @@ namespace HospitalProject_W2022.Controllers
         // GET: Staff/DeleteConfirm/5
         public ActionResult DeleteConfirm(int id)
         {
-            string url = "FindStaff/" + id;
+            string url = "StaffData/FindStaff/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            StaffsDto selectedStaffsDto = response.Content.ReadAsAsync<StaffsDto>().Result;
+            StaffDto selectedStaffsDto = response.Content.ReadAsAsync<StaffDto>().Result;
             return View(selectedStaffsDto);
         }
 
@@ -195,7 +200,7 @@ namespace HospitalProject_W2022.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            string url = "DeleteStaff/" + id;
+            string url = "StaffData/DeleteStaff/" + id;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
 

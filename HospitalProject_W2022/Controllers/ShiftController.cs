@@ -18,7 +18,7 @@ namespace HospitalProject_W2022.Controllers
         static ShiftController()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44377/api/ShiftData/");
+            client.BaseAddress = new Uri("https://localhost:44377/api/");
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace HospitalProject_W2022.Controllers
         // GET: Shift/List
         public ActionResult List()
         {
-            string url = "ListShifts";
+            string url = "ShiftData/ListShifts";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             IEnumerable<ShiftDto> shiftDtos = response.Content.ReadAsAsync<IEnumerable<ShiftDto>>().Result;
@@ -45,11 +45,66 @@ namespace HospitalProject_W2022.Controllers
         // GET: Shift/Details/5
         public ActionResult Details(int id)
         {
-            string url = "FindShift/" + id;
-            HttpResponseMessage response = client.GetAsync(url).Result;
+            DetailsShift viewModel = new DetailsShift();
 
-            ShiftDto selectedShiftDto = response.Content.ReadAsAsync<ShiftDto>().Result;
-            return View(selectedShiftDto);
+            //communicate wth data controller class
+            string url = "ShiftData/FindShift/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            ShiftDto SelectedShift = response.Content.ReadAsAsync<ShiftDto>().Result;
+
+            viewModel.SelectedShift = SelectedShift;
+
+            url = "StaffData/ListStaffsForShift/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<StaffDto> KeptStaffs = response.Content.ReadAsAsync<IEnumerable<StaffDto>>().Result;
+
+            viewModel.KeptStaff = KeptStaffs;
+
+            url = "StaffData/ListStaffsNotInPerticularShift/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<StaffDto> StaffOptions = response.Content.ReadAsAsync<IEnumerable<StaffDto>>().Result;
+
+            viewModel.StaffOptions = StaffOptions;
+
+            return View(viewModel);
+        }
+
+        /// <summary>
+        /// add new staff in the perticular shift
+        /// </summary>
+        /// <param name="id">passing parameter shift id</param>
+        /// <param name="StaffID">passing parameter staff id</param>
+        /// <returns>add staff in the perticular shift</returns>
+        //POST: Shift/Associate/{id}
+        [HttpPost]
+        public ActionResult Associate(int id, int SID)
+        {
+            //communicate with data controller class
+            string url = "ShiftData/AssociateShiftWithStaff/" + id + "/" + SID;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            return RedirectToAction("Details/" + id);
+        }
+
+        /// <summary>
+        /// remove staff from the perticular shift
+        /// </summary>
+        /// <param name="id">passing parameter shift id</param>
+        /// <param name="StaffID">passing parameter staff id</param>
+        /// <returns>remove staff from perticular shift</returns>
+        //GET: Shift/UnAssociate/{id}?SID={SID}
+        [HttpGet]
+        public ActionResult UnAssociate(int id, int SID)
+        {
+            //communicate with data controller class
+            string url = "ShiftData/UnAssociateShiftWithStaff/" + id + "/" + SID;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            return RedirectToAction("Details/" + id);
         }
 
         /// <summary>
@@ -69,11 +124,7 @@ namespace HospitalProject_W2022.Controllers
         // GET: Shift/New
         public ActionResult New()
         {
-            //need staff information for staff dropdown
-            string url = "ListStaffs";
-            HttpResponseMessage response = client.GetAsync(url).Result;
-            IEnumerable<StaffDto> staffOptions = response.Content.ReadAsAsync<IEnumerable<StaffDto>>().Result;
-            return View(staffOptions);
+            return View();
         }
 
         /// <summary>
@@ -86,7 +137,7 @@ namespace HospitalProject_W2022.Controllers
         [HttpPost]
         public ActionResult Create(Shift shift)
         {
-            string url = "AddShift";
+            string url = "ShiftData/AddShift";
 
             string jsonpayload = jss.Serialize(shift);
 
@@ -116,16 +167,16 @@ namespace HospitalProject_W2022.Controllers
             UpdateShift viewModel = new UpdateShift();
             
             //selected shift information
-            string url = "FindShift/" + id;
+            string url = "ShiftData/FindShift/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             ShiftDto selectedShiftDto = response.Content.ReadAsAsync<ShiftDto>().Result;
             viewModel.SelectedShift = selectedShiftDto;
 
             //list of staff dropdown 
-            url = "ListStaffs";
+            url = "StaffData/ListStaffsForShift/" + id;
             response = client.GetAsync(url).Result;
-            IEnumerable<StaffDto> staffOptions = response.Content.ReadAsAsync<IEnumerable<StaffDto>>().Result;
-            viewModel.StaffOptions = staffOptions;
+            IEnumerable<StaffDto> KeptStaffs = response.Content.ReadAsAsync<IEnumerable<StaffDto>>().Result;
+            viewModel.KeptStaff = KeptStaffs;
 
             return View(viewModel);
         }
@@ -141,7 +192,7 @@ namespace HospitalProject_W2022.Controllers
         [HttpPost]
         public ActionResult Update(int id, Shift shift)
         {
-            string url = "UpdateShift/" + id;
+            string url = "ShiftData/UpdateShift/" + id;
 
             string jsonpayload = jss.Serialize(shift);
 
@@ -167,7 +218,7 @@ namespace HospitalProject_W2022.Controllers
         // GET: Shift/DeleteConfirm/5
         public ActionResult DeleteConfirm(int id)
         {
-            string url = "FindShift/" + id;
+            string url = "ShiftData/FindShift/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             ShiftDto selectedShiftDto = response.Content.ReadAsAsync<ShiftDto>().Result;
@@ -184,7 +235,7 @@ namespace HospitalProject_W2022.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            string url = "DeleteShift/" + id;
+            string url = "ShiftData/DeleteShift/" + id;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
 

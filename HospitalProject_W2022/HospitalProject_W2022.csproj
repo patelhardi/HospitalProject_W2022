@@ -220,6 +220,14 @@
     <Compile Include="Migrations\202203271807290_createrelationshipstaffandshift.Designer.cs">
       <DependentUpon>202203271807290_createrelationshipstaffandshift.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204031947182_changedepartmentinstaff.cs" />
+    <Compile Include="Migrations\202204031947182_changedepartmentinstaff.Designer.cs">
+      <DependentUpon>202204031947182_changedepartmentinstaff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204032050402_changemamytomanystaffandshift.cs" />
+    <Compile Include="Migrations\202204032050402_changemamytomanystaffandshift.Designer.cs">
+      <DependentUpon>202204032050402_changemamytomanystaffandshift.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -229,7 +237,10 @@
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\Shift.cs" />
     <Compile Include="Models\Staff.cs" />
-    <Compile Include="Models\ViewModels\UpdatePatient.cs" />
+    <Compile Include="Models\ViewModels\DetailsDepartment.cs" />
+    <Compile Include="Models\ViewModels\DetailsPatient.cs" />
+    <Compile Include="Models\ViewModels\DetailsShift.cs" />
+    <Compile Include="Models\ViewModels\DetailsStaff.cs" />
     <Compile Include="Models\ViewModels\UpdateAppointment.cs" />
     <Compile Include="Models\ViewModels\UpdateShift.cs" />
     <Compile Include="Models\ViewModels\UpdateStaff.cs" />
@@ -247,6 +258,7 @@
     <Content Include="Content\Site.css" />
     <None Include="jsondata\appointment.json" />
     <Content Include="jsondata\patient.json" />
+    <Content Include="jsondata\department.json" />
     <None Include="jsondata\shift.json" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -301,7 +313,6 @@
     <Content Include="Views\Appointment\Edit.cshtml" />
     <Content Include="Views\Appointment\Error.cshtml" />
     <Content Include="Views\Appointment\List.cshtml" />
-    <Content Include="Views\Appointment\ListByPatient.cshtml" />
     <Content Include="Views\Appointment\New.cshtml" />
     <Content Include="Views\Department\DeleteConfirm.cshtml" />
     <Content Include="Views\Department\Details.cshtml" />
@@ -354,6 +365,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202203271807290_createrelationshipstaffandshift.resx">
       <DependentUpon>202203271807290_createrelationshipstaffandshift.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204031947182_changedepartmentinstaff.resx">
+      <DependentUpon>202204031947182_changedepartmentinstaff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204032050402_changemamytomanystaffandshift.resx">
+      <DependentUpon>202204032050402_changemamytomanystaffandshift.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

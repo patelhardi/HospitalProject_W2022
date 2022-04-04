@@ -1,4 +1,4 @@
-﻿@model HospitalProject_W2022.Models.StaffsDto
+﻿@model HospitalProject_W2022.Models.ViewModels.DetailsStaff
 @{
     ViewBag.Title = "Details";
 }
@@ -11,14 +11,14 @@
             <br />the Staff list
         </a>
         <!-- Update appointment button -->
-        <a href="/Staff/Edit/@Model.SID" class="btn btn-dblue btn-lg" role="button">
+        <a href="/Staff/Edit/@Model.SelectedStaff.SID" class="btn btn-dblue btn-lg" role="button">
             <span class="glyphicon glyphicon-user glyphsize"></span>
             <br />Update
             <span class="glyphicon glyphicon-edit"></span>
             <br />Staff
         </a>
         <!-- Delete appointment button -->
-        <a href="/Staff/DeleteConfirm/@Model.SID" class="btn btn-dblue btn-lg" role="button">
+        <a href="/Staff/DeleteConfirm/@Model.SelectedStaff.SID" class="btn btn-dblue btn-lg" role="button">
             <span class="glyphicon glyphicon-user glyphsize"></span>
             <br />Delete
             <span class="glyphicon glyphicon-minus"></span>
@@ -29,9 +29,20 @@
 
 <h2>Staff Details</h2>
 <ul>
-    <li>Staff Id: @Model.SID</li>
-    <li>Name: @Model.FName @Model.LName</li>
-    <li>Date of birth: @Model.DOB</li>
-    <li>Contact: @Model.Contact</li>
-    <li>Department: @Model.DID </li>
+    <li>Staff Id: @Model.SelectedStaff.SID</li>
+    <li>Name: @Model.SelectedStaff.FName @Model.SelectedStaff.LName</li>
+    <li>Date of birth: @Model.SelectedStaff.DOB.ToLongDateString()</li>
+    <li>Contact: @Model.SelectedStaff.Contact</li>
+    <li>Department: @Model.SelectedStaff.DName </li>
 </ul>
+
+<br/>
+
+<h3>List of Shifts for @Model.SelectedStaff.FName @Model.SelectedStaff.LName</h3>
+<div>
+    @foreach (var shift in Model.KeptShifts)
+    {
+    <label style="padding: 12px 12px 12px 0; display: inline-block;">@shift.Date.ToLongDateString() | @shift.Type</label>
+        <br />
+    }
+</div>

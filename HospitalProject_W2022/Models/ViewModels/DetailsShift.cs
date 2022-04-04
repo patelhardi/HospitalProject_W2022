@@ -5,9 +5,10 @@ using System.Web;
 
 namespace HospitalProject_W2022.Models.ViewModels
 {
-    public class UpdateShift
+    public class DetailsShift
     {
         public ShiftDto SelectedShift { get; set; }
         public IEnumerable<StaffDto> KeptStaff { get; set; }
+        public IEnumerable<StaffDto> StaffOptions { get; set; }
     }
 }

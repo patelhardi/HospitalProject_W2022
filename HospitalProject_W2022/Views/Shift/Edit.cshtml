@@ -18,20 +18,6 @@
         <input type="text" name="SHID" value="@Model.SelectedShift.SHID" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
     <div>
-        <label style="padding: 12px 12px 12px 0; display: inline-block;">Staff Member:</label>
-        <select name="SID" style="padding: 12px 12px 12px 0; display: inline-block;">
-            @foreach (var staff in Model.StaffOptions)
-            {
-                string selected = "";
-                if (staff.SID == Model.SelectedShift.SID)
-                {
-                    selected = "selected";
-                }
-                <option value="@staff.SID" @selected>@staff.FName @staff.LName</option>
-            }
-        </select>
-    </div>
-    <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Date:</label>
         <input type="date" name="date" id="myDate" value="@Model.SelectedShift.Date.ToShortDateString()" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
@@ -47,6 +33,18 @@
         <input type="submit" value="Update Shift" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
     </div>
 </form>
+
+<br />
+
+<h3>List of Staffs in the Shift</h3>
+<div>
+    @foreach (var staff in Model.KeptStaff)
+    {
+        <a href="/Staff/Details/@staff.SID">@staff.FName @staff.LName</a>
+        <a href="/Shift/UnAssociate/@Model.SelectedShift.SHID?StaffID=@staff.SID" style="color:red;"> [ x ] </a>
+        <br />
+    }
+</div>
 
 <!--Reference: https://stackoverflow.com/questions/43274559/how-do-i-restrict-past-dates-in-html5-input-type-date-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

@@ -1,4 +1,4 @@
-﻿@model HospitalProject_W2022.Models.ShiftDto
+﻿@model HospitalProject_W2022.Models.ViewModels.DetailsShift
 @{
     ViewBag.Title = "Details";
 }
@@ -11,14 +11,14 @@
             <br />the Shift list
         </a>
         <!-- Update shift button -->
-        <a href="/Shift/Edit/@Model.SHID" class="btn btn-dblue btn-lg" role="button">
+        <a href="/Shift/Edit/@Model.SelectedShift.SHID" class="btn btn-dblue btn-lg" role="button">
             <span class="glyphicon glyphicon-user glyphsize"></span>
             <br />Update
             <span class="glyphicon glyphicon-edit"></span>
             <br />Shift
         </a>
         <!-- Delete shift button -->
-        <a href="/Shift/DeleteConfirm/@Model.SHID" class="btn btn-dblue btn-lg" role="button">
+        <a href="/Shift/DeleteConfirm/@Model.SelectedShift.SHID" class="btn btn-dblue btn-lg" role="button">
             <span class="glyphicon glyphicon-user glyphsize"></span>
             <br />Delete
             <span class="glyphicon glyphicon-minus"></span>
@@ -27,7 +27,32 @@
     </nav>
 </div>
 
-<div>Staff Member: @Model.FName @Model.LName</div>
-<div>Date: @Model.Date.ToLongDateString()</div>
-<div>Type: @Model.Type</div>
+<div>Date: @Model.SelectedShift.Date.ToLongDateString()</div>
+<div>Type: @Model.SelectedShift.Type</div>
+
+<div>
+    <h3>List of Staffs:</h3>
+    @foreach (var staff in Model.KeptStaff)
+    {
+        <a href="/Staff/Details/@staff.SID">@staff.FName @staff.LName</a>
+        <a href="/Shift/UnAssociate/@Model.SelectedShift.SHID?StaffID=@staff.SID" style="color:red;"> [ x ] </a>
+        <br />
+    }
+</div>
+
+<hr />
+
+<div>
+    Add More Staffs to the Shift:
+    <form method="POST" action="/Shift/Associate/@Model.SelectedShift.SHID" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
+        <select name="SID" style="padding: 12px 12px 12px 0; display: inline-block;">
+            @foreach (var staff in Model.StaffOptions)
+            {
+                <option value="@staff.SID">@staff.FName @staff.LName </option>
+            }
+        </select>
+
+        <input type="submit" value="Associate Staff" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
+    </form>
+</div>
 

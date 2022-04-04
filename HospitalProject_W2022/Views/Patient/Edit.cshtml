@@ -1,4 +1,4 @@
-﻿@model HospitalProject_W2022.Models.PatientsDto
+﻿@model HospitalProject_W2022.Models.PatientDto
 
 @{
     ViewBag.Title = "Edit";
@@ -16,7 +16,7 @@
 <form method="POST" action="/Patient/Update/@Model.PID" enctype="multipart/form-data" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
     <div style="display:none;">
         <label>Patient ID:</label>
-        @* Pass through the appointment ID *@
+        @* Pass through the patient ID *@
         <input type="text" name="PID" value="@Model.PID" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
     <div>
@@ -33,7 +33,7 @@
     </div>
     <div>
         <label>Date of birth:</label>
-        <input type="text" name="DOB" value="@Model.DOB" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <input type="date" name="DOB" value="@Model.DOB.ToShortDateString()" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
     <div>
         <label>Address:</label>

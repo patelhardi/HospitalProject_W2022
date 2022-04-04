@@ -31,32 +31,34 @@ namespace HospitalProject_W2022.Controllers
             {
                 SHID = s.SHID,
                 Date = s.Date,
-                Type = s.Type,
-                FName = s.Staff.FName,
-                LName = s.Staff.LName,
-                SID = s.SID
+                Type = s.Type
             })) ;
             return shiftDtos;
         }
 
         /// <summary>
-        /// display list of all staffs
+        /// display list of shifts for perticular staff
         /// </summary>
-        /// <returns>Display list of staffs with name</returns>
-        // GET: api/ShiftData/ListStaffs
+        /// <param name="id">passing parameter staff id</param>
+        /// <returns>list of shifts for perticular staff</returns>
+        // GET: api/ShiftData/ListShiftForStaff/1
         [HttpGet]
-        [Route("api/ShiftData/ListStaffs")]
-        public IEnumerable<StaffDto> ListStaffs()
+        [ResponseType(typeof(ShiftDto))]
+        public IHttpActionResult ListShiftForStaff(int id)
         {
-            List<Staff> staffs = db.Staffs.OrderBy(s => s.FName).ToList();
-            List<StaffDto> staffDtos = new List<StaffDto>();
-            staffs.ForEach(s => staffDtos.Add(new StaffDto()
+            List<Shift> shifts = db.Shifts.Where(
+                s => s.staffs.Any(
+                    st => st.SID == id
+            )).ToList();
+            List<ShiftDto> shiftDtos = new List<ShiftDto>();
+
+            shifts.ForEach(s => shiftDtos.Add(new ShiftDto()
             {
-                SID = s.SID,
-                FName = s.FName,
-                LName = s.LName
+                SHID = s.SHID,
+                Date = s.Date,
+                Type = s.Type
             }));
-            return staffDtos;
+            return Ok(shiftDtos);
         }
 
         /// <summary>
@@ -75,10 +77,7 @@ namespace HospitalProject_W2022.Controllers
             {
                 SHID = shift.SHID,
                 Date = shift.Date,
-                Type = shift.Type,
-                FName = shift.Staff.FName,
-                LName = shift.Staff.LName,
-                SID = shift.SID
+                Type = shift.Type
             };
             if (shift == null)
             {
@@ -86,6 +85,46 @@ namespace HospitalProject_W2022.Controllers
             }
 
             return Ok(shiftDto);
+        }
+
+        /// <summary>
+        /// add new staff in the perticular shift
+        /// </summary>
+        /// <param name="shiftid">passing parameter shift id</param>
+        /// <param name="staffid">passing parameter staff id</param>
+        /// <returns>add new staff for the perticular shift</returns>
+        // POST: api/ShiftData/AssociateShiftWithStaff/2/7
+        [ResponseType(typeof(void))]
+        [HttpPost]
+        [Route("api/ShiftData/AssociateShiftWithStaff/{shiftid}/{staffid}")]
+        public IHttpActionResult AssociateShiftWithStaff(int shiftid, int staffid)
+        {
+            Shift SelectedShift = db.Shifts.Include(sh => sh.staffs).Where(sh => sh.SHID == shiftid).FirstOrDefault();
+            Staff SelectedStaff = db.Staffs.Find(staffid);
+
+            SelectedShift.staffs.Add(SelectedStaff);
+            db.SaveChanges();
+            return Ok();
+        }
+
+        /// <summary>
+        /// remove staff from perticular shift
+        /// </summary>
+        /// <param name="shiftid">passing parameter shift id</param>
+        /// <param name="staffid">passing parameter staff id</param>
+        /// <returns>remove staff from the perticular shift</returns>
+        // POST: api/ShiftData/UnAssociateShiftWithStaff/2/7
+        [ResponseType(typeof(void))]
+        [HttpPost]
+        [Route("api/ShiftData/UnAssociateShiftWithStaff/{shiftid}/{staffid}")]
+        public IHttpActionResult UnAssociateShiftWithStaff(int shiftid, int staffid)
+        {
+            Shift SelectedShift = db.Shifts.Include(sh => sh.staffs).Where(sh => sh.SHID == shiftid).FirstOrDefault();
+            Staff SelectedStaff = db.Staffs.Find(staffid);
+
+            SelectedShift.staffs.Remove(SelectedStaff);
+            db.SaveChanges();
+            return Ok();
         }
 
         /// <summary>

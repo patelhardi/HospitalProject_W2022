@@ -1,4 +1,4 @@
-﻿@model HospitalProject_W2022.Models.PatientsDto
+﻿@model HospitalProject_W2022.Models.PatientDto
 @{
     ViewBag.Title = "DeleteConfirm";
 }
@@ -8,6 +8,5 @@
 <h2>@Model.FName @Model.LName</h2>
 <form action="/patient/Delete/@Model.PID" method="POST">
     <input type="submit" value="Confirm Delete" />
-
 </form>
 

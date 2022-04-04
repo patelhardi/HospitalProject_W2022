@@ -20,7 +20,7 @@ namespace HospitalProject_W2022.Models
     }
 
     // transfer data
-    public class PatientsDto
+    public class PatientDto
     {
         public int PID { get; set; }
         public string FName { get; set; }

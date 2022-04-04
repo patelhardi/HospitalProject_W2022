@@ -15,17 +15,23 @@ namespace HospitalProject_W2022.Models
         public string LName { get; set; }
         public DateTime DOB { get; set; }
         public long Contact { get; set; }
-        public string DID { get; set; }
+        [ForeignKey("Department")]
+        public int DID { get; set; }
+        public virtual Department Department { get; set; }
+
+        //many shifts for one staff
+        public ICollection<Shift> shifts { get; set; }
     }
 
-    public class StaffsDto
+    public class StaffDto
     {
         public int SID { get; set; }
         public string FName { get; set; }
         public string LName { get; set; }
         public DateTime DOB { get; set; }
         public long Contact { get; set; }
-        public string DID { get; set; }
+        public string DName { get; set; }
+        public int DID { get; set; }
     }
 
 }

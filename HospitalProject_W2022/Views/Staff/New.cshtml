@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HospitalProject_W2022.Models.PatientDto>
+﻿@model IEnumerable<HospitalProject_W2022.Models.DepartmentDto>
 @{
     ViewBag.Title = "New";
 }
@@ -30,8 +30,13 @@
         <input type="number" name="contact" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
     <div>
-        <label style="padding: 12px 12px 12px 0; display: inline-block;">Department ID:</label>
-        <input type="text" name="did" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <label style="padding: 12px 12px 12px 0; display: inline-block;">Department:</label>
+        <select name="DID" style="padding: 12px 12px 12px 0; display: inline-block;">
+            @foreach (var department in Model)
+            {
+                <option value="@department.DID">@department.DName</option>
+            }
+        </select>
     </div>
     <div>
         <input type="submit" value="Add Staff" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
