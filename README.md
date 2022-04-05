@@ -1,6 +1,6 @@
 # Hospital Project W2022
-## About the Project
-
+## 1. About the Project
+<br>
 This project is intended to build a general Content Management System(CMS) for hospitals. There are many functions included:
 
 - Read, Create, Update, Delete(CRUD) for each or all hospital department
@@ -8,22 +8,22 @@ This project is intended to build a general Content Management System(CMS) for h
 - Manage staff information (CRUD)
 - Manage staff's shifts (CRUD)
 - Patients can add, update or delete their appointment(s). CMS Admin can view all the appointments
-
-
+<br>
 This project was made in collaboration with:
 
 - [Hardi Hemantkumar Patel](https://github.com/patelhardi)
 - [Jenny Dcruz](https://github.com/jendcruz22)
 - [Qiyuan Liu](https://github.com/liuqiyuan628)
+<br>
+<br>
 
-
-
-## Entities Relationship
+## 2. Entities Relationship
 
 ![entyties relationship](https://user-images.githubusercontent.com/73659957/161692167-3d947073-62ab-4a00-838b-ddd02e8b44b2.png)
-
-
-### Authorization Permission
+<br>
+<br>
+<br>
+### 2.2 Authorization Permissions for Diffente Role
 
 - Department Entity – All Functionality – Admin Role
 - Patient Entity – All Functionality – Admin Role
@@ -33,11 +33,11 @@ This project was made in collaboration with:
   - Create, Update, Delete - Patient Role
   - List All Appointment – Admin Role
   - Find Appointment – Admin, Patient Role
+<br>
+<br>
 
-
-
-## How to Run This Project?
-
+## 3. How to Run This Project?
+<br>
 1. Clone the repository in Visual Studio
 2. Open the project folder on your computer (e.g. File Explore for Windows Users)
 3. Create an <App_Data> folder in the main project folder
@@ -48,7 +48,7 @@ update-database
 5. The project should set up
 
 
-### Before checking all the functions, manually add users data for Authorization!
+### 3.2 Before checking all the functions, manually add users data for Authorization!
 
 1. Run the project on your browser and create at least two users using the registration function. Then close the browser and go back to Visual Studio
 2. open you database in the <SQL Server Object Explorer>, you will find all the tables for this project
