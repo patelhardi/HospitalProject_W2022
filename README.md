@@ -37,7 +37,7 @@ This project was made in collaboration with:
 <br>
 
 ## 3. How to Run This Project?
-<br>
+
 1. Clone the repository in Visual Studio
 2. Open the project folder on your computer (e.g. File Explore for Windows Users)
 3. Create an <App_Data> folder in the main project folder
