@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HospitalProject_W2022.Models.AppointmentDto>
+﻿@model HospitalProject_W2022.Models.ViewModels.AppointmentList
 @{
     ViewBag.Title = "List";
 }
@@ -12,8 +12,11 @@
     </a>
 </div>
 
+<div>IsAdmin: @Model.IsAdmin </div>
+
+
 <h2>List of Appointments</h2>
-@foreach (var appointment in Model)
+@foreach (var appointment in Model.Appointments)
 {
     <div><a href="/Appointment/Details/@appointment.AID">Patient Name: @appointment.FName @appointment.LName</a></div>
     <div>Reason: @appointment.Reason</div>

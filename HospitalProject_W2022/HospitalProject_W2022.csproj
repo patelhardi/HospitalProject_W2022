@@ -237,10 +237,15 @@
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\Shift.cs" />
     <Compile Include="Models\Staff.cs" />
+    <Compile Include="Models\ViewModels\AppointmentList.cs" />
+    <Compile Include="Models\ViewModels\DepartmentList.cs" />
     <Compile Include="Models\ViewModels\DetailsDepartment.cs" />
     <Compile Include="Models\ViewModels\DetailsPatient.cs" />
     <Compile Include="Models\ViewModels\DetailsShift.cs" />
     <Compile Include="Models\ViewModels\DetailsStaff.cs" />
+    <Compile Include="Models\ViewModels\PatientList.cs" />
+    <Compile Include="Models\ViewModels\ShiftList.cs" />
+    <Compile Include="Models\ViewModels\StaffList.cs" />
     <Compile Include="Models\ViewModels\UpdateAppointment.cs" />
     <Compile Include="Models\ViewModels\UpdateShift.cs" />
     <Compile Include="Models\ViewModels\UpdateStaff.cs" />

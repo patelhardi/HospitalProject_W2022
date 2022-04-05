@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HospitalProject_W2022.Models.PatientDto>
+﻿@model HospitalProject_W2022.Models.ViewModels.PatientList
 @{
     ViewBag.Title = "List";
 }
@@ -9,9 +9,10 @@
     <span class="glyphicon glyphicon-home glyphsize"></span>
     <br />Add New Patient
 </a>
+<div>IsAdmin: @Model.IsAdmin </div>
 
 <ul>
-    @foreach (var patient in Model)
+    @foreach (var patient in Model.Patients)
     {
         <li><a href="/patient/details/@patient.PID">Patient ID: @patient.PID | @patient.FName @patient.LName</a></li>
     }

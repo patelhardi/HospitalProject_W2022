@@ -61,22 +61,36 @@ namespace HospitalProject_W2022.Controllers
             return;
         }
 
+        /// <summary>
+        /// Display list of all departements
+        /// select * from departements
+        /// </summary>
+        /// <returns>List of all departements</returns>
+
         // GET: Department/List
         [Authorize(Roles = "Admin")]
         public ActionResult List()
         {
             GetApplicationCookie();
             //curl https://localhost:44377/api/departmentdata/listdepartments
+
+            DepartmentList ViewModel = new DepartmentList();
+
+            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                ViewModel.IsAdmin = true;
+            else ViewModel.IsAdmin = false;
+
             string url = "departmentdata/listdepartments";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             Debug.WriteLine("the response code is >>" + response.StatusCode);
 
-            IEnumerable<DepartmentDto> departments = response.Content.ReadAsAsync<IEnumerable<DepartmentDto>>().Result;
-            Debug.WriteLine("(controller)number of departments received >>");
-            Debug.WriteLine(departments.Count());
-
-            return View(departments);
+            IEnumerable<DepartmentDto> Departments = response.Content.ReadAsAsync<IEnumerable<DepartmentDto>>().Result;
+            // Debug.WriteLine("(controller)number of departments received >>");
+            //Debug.WriteLine(departments.Count());
+            //ViewModel.Departments = Departments;
+            ViewModel.Departments = Departments;
+            return View(ViewModel);
         }
 
         // GET: Department/Details/5
@@ -86,7 +100,12 @@ namespace HospitalProject_W2022.Controllers
         {
             GetApplicationCookie();
 
-            DetailsDepartment viewModel = new DetailsDepartment();
+            DetailsDepartment ViewModel = new DetailsDepartment();
+
+            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                ViewModel.IsAdmin = true;
+            else ViewModel.IsAdmin = false;
+
             //GetApplicationCookie();
             //curl https://localhost:44377/api/patientdata/findPatient/{id}
             string url = "departmentdata/findDepartment/" + id;
@@ -95,7 +114,7 @@ namespace HospitalProject_W2022.Controllers
             //Debug.WriteLine("the response code is >>" + response.StatusCode);
 
             DepartmentDto selectedDepartment = response.Content.ReadAsAsync<DepartmentDto>().Result;
-            viewModel.SelectedDepartment = selectedDepartment;
+            ViewModel.SelectedDepartment = selectedDepartment;
             //Debug.WriteLine("patients received >>");
             //Debug.WriteLine(selectedPatient.FName);
 
@@ -103,8 +122,8 @@ namespace HospitalProject_W2022.Controllers
             response = client.GetAsync(url).Result;
             IEnumerable<StaffDto> relatedStaffs = response.Content.ReadAsAsync<IEnumerable<StaffDto>>().Result;
 
-            viewModel.RelatedStaffs = relatedStaffs;
-            return View(viewModel);
+            ViewModel.RelatedStaffs = relatedStaffs;
+            return View(ViewModel);
         }
 
         public ActionResult Error()

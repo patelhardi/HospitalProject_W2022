@@ -7,6 +7,7 @@ namespace HospitalProject_W2022.Models.ViewModels
 {
     public class DetailsDepartment
     {
+        public bool IsAdmin { get; set; }
         public DepartmentDto SelectedDepartment { get; set; }
         public IEnumerable<StaffDto> RelatedStaffs { get; set; }
     }

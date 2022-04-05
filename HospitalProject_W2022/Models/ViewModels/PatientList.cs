@@ -5,11 +5,12 @@ using System.Web;
 
 namespace HospitalProject_W2022.Models.ViewModels
 {
-    public class DetailsStaff
+    public class PatientList
     {
+
+
         public bool IsAdmin { get; set; }
 
-        public StaffDto SelectedStaff { get; set; }
-        public IEnumerable<ShiftDto> KeptShifts { get; set; }
+        public IEnumerable<PatientDto> Patients { get; set; }
     }
 }

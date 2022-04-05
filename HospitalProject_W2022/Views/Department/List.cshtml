@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HospitalProject_W2022.Models.DepartmentDto>
+﻿@model HospitalProject_W2022.Models.ViewModels.DepartmentList
 @{
     ViewBag.Title = "List";
 }
@@ -9,9 +9,8 @@
     <span class="glyphicon glyphicon-home glyphsize"></span>
     <br />Add New Department
 </a>
+<div>IsAdmin: @Model.IsAdmin </div>
+@foreach (var department in Model.Departments) { 
+  <h2><a href="/department/details/@department.DID"> @department.DName </a></h2>
+    <div>Department ID: @department.DID</div> }
 
-@foreach (var department in Model)
-{
-    <h2><a href="/department/details/@department.DID">@department.DName</a></h2>
-    <div>Department ID: @department.DID</div>
-}

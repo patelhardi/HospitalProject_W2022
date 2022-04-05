@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HospitalProject_W2022.Models.ShiftDto>
+﻿@model HospitalProject_W2022.Models.ViewModels.ShiftList
 @{
     ViewBag.Title = "List";
 }
@@ -11,9 +11,10 @@
         <br />Shift
     </a>
 </div>
+<div>IsAdmin: @Model.IsAdmin </div>
 
 <h2>List of Shifts</h2>
-@foreach (var shift in Model)
+@foreach (var shift in Model.Shifts)
 {
     <div><a href="/Shift/Details/@shift.SHID">Type: @shift.Type</a></div>
     <div>Date: @shift.Date.ToLongDateString()</div>
