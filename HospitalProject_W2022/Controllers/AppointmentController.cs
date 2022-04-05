@@ -61,7 +61,7 @@ namespace HospitalProject_W2022.Controllers
         /// <returns>List of all appointments</returns>
         // GET: Appointment/List
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Patient")]
         public ActionResult List()
         {
             GetApplicationCookie();
