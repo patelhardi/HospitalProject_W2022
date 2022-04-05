@@ -3,10 +3,14 @@
 <br>
 This project is intended to build a general Content Management System(CMS) for hospitals. There are many functions included:
 
-- Read, Create, Update, Delete(CRUD) for each or all hospital department
-- Manage patient information (CRUD)
-- Manage staff information (CRUD)
-- Manage staff's shifts (CRUD)
+- Manage Department (CRUD)
+- Manage patient (CRUD)
+- Manage staff (CRUD)
+- Manage shifts (CRUD)
+- Manage Appointment (CRUD)
+- Manage relationship between Staff and Shift
+- Manage relationship between Patient and Appointment
+- Manage relationship between Staff and Department
 - Patients can add, update or delete their appointment(s). CMS Admin can view all the appointments
 <br>
 This project was made in collaboration with:
@@ -31,7 +35,7 @@ This project was made in collaboration with:
 - Schedule Entity – All Functionality – Admin Role
 - Appointment Entity
   - Create, Update, Delete - Patient Role
-  - List All Appointment – Admin Role
+  - List All Appointment – Admin, Patient Role
   - Find Appointment – Admin, Patient Role
 <br>
 <br>
