@@ -1,0 +1,61 @@
+# Hospital Project W2022
+## About the Project
+
+This project is intended to build a general Content Management System(CMS) for hospitals. There are many functions included:
+
+- Read, Create, Update, Delete(CRUD) for each or all hospital department
+- Manage patient information (CRUD)
+- Manage staff information (CRUD)
+- Manage staff's shifts (CRUD)
+- Patients can add, update or delete their appointment(s). CMS Admin can view all the appointments
+
+
+This project was made in collaboration with:
+
+- [Hardi Hemantkumar Patel](https://github.com/patelhardi)
+- [Jenny Dcruz](https://github.com/jendcruz22)
+- [Qiyuan Liu](https://github.com/liuqiyuan628)
+
+
+
+## Entities Relationship
+
+![entyties relationship](https://user-images.githubusercontent.com/73659957/161692167-3d947073-62ab-4a00-838b-ddd02e8b44b2.png)
+
+
+### Authorization Permission
+
+- Department Entity – All Functionality – Admin Role
+- Patient Entity – All Functionality – Admin Role
+- Staff Entity – All Functionality – Admin Role
+- Schedule Entity – All Functionality – Admin Role
+- Appointment Entity
+  - Create, Update, Delete - Patient Role
+  - List All Appointment – Admin Role
+  - Find Appointment – Admin, Patient Role
+
+
+
+## How to Run This Project?
+
+1. Clone the repository in Visual Studio
+2. Open the project folder on your computer (e.g. File Explore for Windows Users)
+3. Create an <App_Data> folder in the main project folder
+4. Go back to Visual Studio and open Package Manager Console and run the query to build the database on your local server:
+```
+update-database
+```
+5. The project should set up
+
+
+### Before checking all the functions, manually add users data for Authorization!
+
+1. Run the project on your browser and create at least two users using the registration function. Then close the browser and go back to Visual Studio
+2. open you database in the <SQL Server Object Explorer>, you will find all the tables for this project
+3. Find <dbo.AspNetRoles> table and create two roles:
+  - id:1, Name:"Admin"
+  - id:2, Name:"Patient"
+4. Find <dbo.AspNetUsers> table and you will find the two users you registered. Copy one of the user's id.
+5. Find <dbo.AspNetUserRoles> table, and paste the id you copied into the first Userid row, then set the RoleId to "1"(1 = "Admin")
+6. Repeat these steps and set another user's RoleId to "2"(2 = patient)
+7. Now, you've set a user with "Admin" role, and the other one with "Patient" role. You are good to go!
