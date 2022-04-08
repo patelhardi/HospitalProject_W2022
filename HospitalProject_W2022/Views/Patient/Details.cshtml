@@ -28,11 +28,13 @@
     <div>IsAdmin: @Model.IsAdmin </div>
 
     <h2>@Model.SelectedPatient.FName @Model.SelectedPatient.LName</h2>
-    <div>Patient ID: @Model.SelectedPatient.PID</div>
-    <div>Health Card: @Model.SelectedPatient.HC</div>
-    <div>Date of Birth: @Model.SelectedPatient.DOB.ToLongDateString()</div>
-    <div>Address: @Model.SelectedPatient.Address</div>
-    <div>Contact: @Model.SelectedPatient.Contact</div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Patient ID: @Model.SelectedPatient.PID</li>
+        <li class="list-group-item">Health Card: @Model.SelectedPatient.HC</li>
+        <li class="list-group-item">Date of Birth: @Model.SelectedPatient.DOB.ToLongDateString()</li>
+        <li class="list-group-item">Address: @Model.SelectedPatient.Address</li>
+        <li class="list-group-item">Contact: @Model.SelectedPatient.Contact</li>
+    </ul>
 </div>
 
 <div>

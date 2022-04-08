@@ -13,9 +13,32 @@
 </div>
 <div>IsAdmin: @Model.IsAdmin </div>
 
-<h2>List of Staffs</h2>
-@foreach (var staff in Model.Staffs)
-{
-    <div><a href="/Staff/Details/@staff.SID">Staff Name: @staff.FName @staff.LName</a></div>
-}
+<h2>List of Staff</h2>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Date of Birth</th>
+            <th scope="col">Department ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var staff in Model.Staffs)
+        {
+            <tr>
+                <th scope="row">@staff.SID</th>
+                <td><a href="/Staff/Details/@staff.SID">@staff.FName @staff.LName</a></td>
+                <td>@staff.Contact</td>
+                <td>@staff.DOB</td>
+                <td>@staff.DID</td>
+                <td><a href="/Staff/Details/@staff.SID"><span class="viewLink glyphicon glyphicon-eye-open"></span></a></td>
+                <td><a href="/Staff/Edit/@staff.SID"><span class="editLink glyphicon glyphicon-pencil"></span></a></td>
+                <td><a href="/Staff/DeleteConfirm/@staff.SID"><span class="delLink glyphicon glyphicon-trash"></span></a></td>
+            </tr>
+         }
+    </tbody>
+</table>
+
 

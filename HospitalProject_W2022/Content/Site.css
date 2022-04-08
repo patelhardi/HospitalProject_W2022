@@ -10,7 +10,7 @@
     background-repeat: no-repeat;"
 }
 
-a, .glyphicon {
+a, a:visited, .glyphicon {
     color: #333333;
     text-decoration: none;
 }
@@ -18,14 +18,32 @@ a, .glyphicon {
 a:hover {
     color: #9d9d9d;
     text-decoration: none;
-    background-color: transparent;
+}
+
+.viewLink:hover, .editLink:hover {
+    color:blue;
+}
+
+.delLink:hover {
+    color:red;
 }
 
 .container {
     padding-right: 0px;
     padding-left: 0px;
 }
-.navbar {
+
+.container > .navbar-header {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.row {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.navbar, .navbar-nav > li > a:hover {
     background: none;
     border: none;
     color #333333;
@@ -33,6 +51,7 @@ a:hover {
 
 .jumbotron {
     background: none;
+    padding-top: 80px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -51,7 +70,6 @@ textarea {
 
 @media only screen and (max-width: 768 px){
     .navbar-collapse collapse, .navbar-header {
-        background-color: white;
         color: #333333;
     }
 
@@ -68,7 +86,6 @@ textarea {
 
 #hero {
     width: 100%;
-    height: 100vh;
     background-size: cover;
     position: relative;
 }
@@ -84,7 +101,7 @@ textarea {
 
     #hero .container {
         position: relative;
-        padding: 74px 0px 0px 0px;
+        padding: 50px 0px 0px 0px;
         text-align: center;
     }
 
@@ -141,7 +158,6 @@ textarea {
 
         #hero .icon-box:hover {
             border-color: #9d9d9d;
-            background-color: #ffff;
         }
 
 @media (min-width: 1024px) {
@@ -207,3 +223,22 @@ section {
         font-family: "Poppins", sans-serif;
         color: #151515;
     }
+.newForm, .editForm {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 2.5%;
+    padding:20px;
+}
+
+
+.delBtn {
+    transition: ease-in-out 0.5s;
+    color: red;
+    background-color: transparent;
+    border: 1px solid red;
+    border-radius: 5%;
+    padding:20px;
+}
+.delBtn:hover {
+    background-color: red;
+    color: white;
+}

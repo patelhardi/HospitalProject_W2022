@@ -12,31 +12,31 @@
     </a>
 </div>
 
-<form method="POST" action="/Staff/Update/@Model.SelectedStaff.SID" enctype="multipart/form-data" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
-    <div style="display:none;">
+<form method="POST" action="/Staff/Update/@Model.SelectedStaff.SID" enctype="multipart/form-data" class="editForm">
+    <div class="form-group">
         <label>Staff ID:</label>
         @* Pass through the staff ID *@
-        <input type="text" name="SID" value="@Model.SelectedStaff.SID" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <input type="text" class="form-control-plaintext" readonly name="SID" value="@Model.SelectedStaff.SID" />
     </div>
-    <div>
+    <div class="form-group">
         <label>First Name:</label>
-        <input type="text" name="FName" value="@Model.SelectedStaff.FName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <input type="text" name="FName" value="@Model.SelectedStaff.FName" />
     </div>
-    <div>
+    <div class="form-group">
         <label>Last Name:</label>
-        <input type="text" name="LName" value="@Model.SelectedStaff.LName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <input type="text" name="LName" value="@Model.SelectedStaff.LName" />
     </div>
-    <div>
+    <div class="form-group">
         <label>Date of birth:</label>
-        <input type="date" name="DOB" value="@Model.SelectedStaff.DOB.ToShortDateString()" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <input type="text" name="DOB" value="@Model.SelectedStaff.DOB" />
     </div>
-    <div>
+    <div class="form-group">
         <label>Contact</label>
-        <input type="number" name="Contact" value="@Model.SelectedStaff.Contact" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <input type="number" name="Contact" value="@Model.SelectedStaff.Contact" />
     </div>
-    <div>
-        <label style="padding: 12px 12px 12px 0; display: inline-block;">Department:</label>
-        <select name="DID" style="padding: 12px 12px 12px 0; display: inline-block;">
+    <div class="form-group">
+        <label>Department:</label>
+        <select name="DID">
             @foreach (var department in Model.DepartmentOptions)
             {
                 string selected = "";
@@ -48,9 +48,10 @@
             }
         </select>
     </div>
-    <div>
-        <input type="submit" value="Update Staff" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
-    </div>
+    <!--<div>
+        <input type="submit" value="Update Staff" />
+    </div>-->
+    <button type="submit" class="btn btn-primary" value="Update Staff">Update Staff</button>
 </form>
 
 <hr />
@@ -59,7 +60,7 @@
 <div>
     @foreach (var shifts in Model.ShiftOptions)
     {
-        <label style="padding: 12px 12px 12px 0; display: inline-block;">@shifts.Date.ToLongDateString() | @shifts.Type</label>
+        <label>@shifts.Date.ToLongDateString() | @shifts.Type</label>
         <br />
     }
 </div>

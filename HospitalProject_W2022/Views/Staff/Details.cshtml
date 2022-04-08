@@ -15,34 +15,54 @@
             <span class="glyphicon glyphicon-user glyphsize"></span>
             <br />Update
             <span class="glyphicon glyphicon-edit"></span>
-            <br />Staff
         </a>
         <!-- Delete appointment button -->
         <a href="/Staff/DeleteConfirm/@Model.SelectedStaff.SID" class="btn btn-dblue btn-lg" role="button">
             <span class="glyphicon glyphicon-user glyphsize"></span>
             <br />Delete
             <span class="glyphicon glyphicon-minus"></span>
-            <br />Staff
         </a>
     </nav>
 </div>
 
-<h2>Staff Details</h2>
-<ul>
-    <li>Staff Id: @Model.SelectedStaff.SID</li>
-    <li>Name: @Model.SelectedStaff.FName @Model.SelectedStaff.LName</li>
-    <li>Date of birth: @Model.SelectedStaff.DOB.ToLongDateString()</li>
-    <li>Contact: @Model.SelectedStaff.Contact</li>
-    <li>Department: @Model.SelectedStaff.DName </li>
-</ul>
-
-<br/>
+<h2>Staff Details: @Model.SelectedStaff.FName @Model.SelectedStaff.LName</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Date of birth</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Department</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">@Model.SelectedStaff.SID</th>
+            <td>@Model.SelectedStaff.DOB.ToLongDateString()</td>
+            <td>@Model.SelectedStaff.Contact</td>
+            <td>@Model.SelectedStaff.DName</td>
+        </tr>
+    </tbody>
+</table>
+<br />
 
 <h3>List of Shifts for @Model.SelectedStaff.FName @Model.SelectedStaff.LName</h3>
 <div>
-    @foreach (var shift in Model.KeptShifts)
-    {
-    <label style="padding: 12px 12px 12px 0; display: inline-block;">@shift.Date.ToLongDateString() | @shift.Type</label>
-        <br />
-    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Date of shift</th>
+                <th scope="col">Type of shift</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var shift in Model.KeptShifts)
+            {
+                <tr>
+                    <td>@shift.Date.ToLongDateString()</td>
+                    <td>@shift.Type</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

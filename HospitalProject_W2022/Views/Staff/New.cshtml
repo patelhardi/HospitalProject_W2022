@@ -12,34 +12,35 @@
 
 <h2>Create New Staff</h2>
 
-<form action="/Staff/Create" method="POST" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
-    <div>
-        <label style="padding: 12px 12px 12px 0; display: inline-block;">First Name:</label>
-        <input type="text" name="fname" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+<form action="/Staff/Create" method="POST" class="newForm">
+    <div class="form-group">
+        <label>First Name:</label>
+        <input class="form-control" type="text" name="fname" />
     </div>
-    <div>
-        <label style="padding: 12px 12px 12px 0; display: inline-block;">Last Name:</label>
-        <input type="text" name="lname" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    <div class="form-group">
+        <label>Last Name:</label>
+        <input class="form-control" type="text" name="lname" />
     </div>
-    <div>
-        <label style="padding: 12px 12px 12px 0; display: inline-block;">Date of Birth:</label>
-        <input type="date" name="dob" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    <div class="form-group">
+        <label>Date of Birth:</label>
+        <input class="form-control" type="date" name="dob" />
     </div>
-    <div>
-        <label style="padding: 12px 12px 12px 0; display: inline-block;">Contact:</label>
-        <input type="number" name="contact" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    <div class="form-group">
+        <label>Contact:</label>
+        <input class="form-control" type="number" name="contact" />
     </div>
-    <div>
-        <label style="padding: 12px 12px 12px 0; display: inline-block;">Department:</label>
-        <select name="DID" style="padding: 12px 12px 12px 0; display: inline-block;">
+    <div class="form-group">
+        <label>Department:</label>
+        <select class="form-control" name="DID">
             @foreach (var department in Model)
             {
                 <option value="@department.DID">@department.DName</option>
             }
         </select>
     </div>
-    <div>
+    <!--<div class="form-group">
         <input type="submit" value="Add Staff" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
-    </div>
+    </div>-->
+    <button type="submit" class="btn btn-primary" value="Add Staff">Add Staff</button>
 </form>
 
