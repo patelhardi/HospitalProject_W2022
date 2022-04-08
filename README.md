@@ -15,10 +15,10 @@ This project is intended to build a general Content Management System(CMS) for h
 <br>
 This project was made in collaboration with:
 
-- [Hardi Hemantkumar Patel](https://github.com/patelhardi)
-- [Jenny Dcruz](https://github.com/jendcruz22)
-- [Qiyuan Liu](https://github.com/liuqiyuan628)
-<br>
+- [Hardi Hemantkumar Patel](https://github.com/patelhardi) - Basic CRUD for Appointment and Shift Entity, Manage one-to-many and many-to-many relationship between all entities
+- [Jenny Dcruz](https://github.com/jendcruz22) - Basic CRUD for Patient and Staff Entity, Overall Project Design Layout
+- [Qiyuan Liu](https://github.com/liuqiyuan628) - Basic CRUD for Department Entity, Manage Authentication and Authorization for all Entities
+<br> 
 <br>
 
 ## 2. Entities Relationship
