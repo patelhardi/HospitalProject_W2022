@@ -1,12 +1,38 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #e9ecef; 
+    border-radius: 0.3rem; 
+    background: -moz-linear-gradient(top, rgba(30,87,153,1) 0%, rgba(30,87,153,0.54) 46%, rgba(125,185,232,0.18) 82%, rgba(125,185,232,0) 100%); 
+    background: -webkit-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(30,87,153,0.54) 46%,rgba(125,185,232,0.18) 82%,rgba(125,185,232,0) 100%);
+    background: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(30,87,153,0.54) 46%,rgba(125,185,232,0.18) 82%,rgba(125,185,232,0) 100%); 
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#007db9e8',GradientType=0 ); 
+    background-repeat: no-repeat;"
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+a, .glyphicon {
+    color: #333333;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #9d9d9d;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.container {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.navbar {
+    background: none;
+    border: none;
+    color #333333;
+}
+
+.jumbotron {
+    background: none;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -22,3 +48,162 @@ select,
 textarea {
     max-width: 280px;
 }
+
+@media only screen and (max-width: 768 px){
+    .navbar-collapse collapse, .navbar-header {
+        background-color: white;
+        color: #333333;
+    }
+
+    a, .glyphicon {
+        text-decoration: none;
+        color #333333;
+    }
+
+    a:hover {
+        color: #333333;
+    }
+
+}
+
+#hero {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    position: relative;
+}
+
+    #hero:before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+
+    #hero .container {
+        position: relative;
+        padding: 74px 0px 0px 0px;
+        text-align: center;
+    }
+
+    #hero h1 {
+        margin: 0;
+        font-size: 56px;
+        font-weight: 700;
+        line-height: 64px;
+        color: #fff;
+        font-family: "Poppins", sans-serif;
+    }
+
+        #hero h1 span {
+            color: #9d9d9d;
+        }
+
+    #hero h2 {
+        color: rgba(255, 255, 255, 0.9);
+        margin: 10px 0 0 0;
+        font-size: 24px;
+    }
+
+    #hero .icon-box {
+        padding: 30px 20px;
+        margin-bottom: 40px;
+        transition: ease-in-out 0.3s;
+        border: 1px solid #333333;
+        height: 100%;
+        text-align: center;
+    }
+
+        #hero .icon-box i {
+            font-size: 32px;
+            line-height: 1;
+            color: #9d9d9d;
+        }
+
+        #hero .icon-box h3 {
+            font-weight: 700;
+            margin: 10px 0 0 0;
+            padding: 0;
+            line-height: 1;
+            font-size: 20px;
+            line-height: 26px;
+        }
+
+            #hero .icon-box h3 a {
+                transition: ease-in-out 0.3s;
+            }
+
+                #hero .icon-box h3 a:hover {
+                    color: #9d9d9d;
+                }
+
+        #hero .icon-box:hover {
+            border-color: #9d9d9d;
+            background-color: #ffff;
+        }
+
+@media (min-width: 1024px) {
+    #hero {
+        background-attachment: fixed;
+    }
+}
+
+@media (max-width: 768px) {
+    #hero {
+        height: auto;
+    }
+
+        #hero h1 {
+            font-size: 28px;
+            line-height: 36px;
+        }
+
+        #hero h2 {
+            font-size: 20px;
+            line-height: 24px;
+        }
+}
+
+/*--------------------------------------------------------------
+# Sections General
+--------------------------------------------------------------*/
+section {
+    padding: 60px 0;
+    overflow: hidden;
+}
+
+.section-title {
+    padding-bottom: 40px;
+}
+
+    .section-title h2 {
+        font-size: 14px;
+        font-weight: 500;
+        padding: 0;
+        line-height: 1px;
+        margin: 0 0 5px 0;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #aaaaaa;
+        font-family: "Poppins", sans-serif;
+    }
+
+        .section-title h2::after {
+            content: "";
+            width: 120px;
+            height: 1px;
+            display: inline-block;
+            margin: 4px 10px;
+        }
+
+    .section-title p {
+        margin: 0;
+        margin: 0;
+        font-size: 36px;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-family: "Poppins", sans-serif;
+        color: #151515;
+    }

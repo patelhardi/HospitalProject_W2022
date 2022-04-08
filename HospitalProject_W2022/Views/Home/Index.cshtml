@@ -2,30 +2,44 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+
+<div class="jumbotron p-5 text-center">
+    <h1>Nipigon Memorial District Hospital</h1>
+    <!-- Source of content: https://www.descriptionari.com/quotes/hospital/-->
+    <p class="lead">The sanctity of the patient, their humanity, is what this hospital strives to uphold - especially in challenging times.</p>
+    <p><a href="/Home/About" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<section id="hero" class="d-flex align-items-center justify-content-center">
+    <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
+            <div class="col-xl-2 col-md-3">
+                <div class="icon-box">
+                    <h3><a href="/Patient/New">New Patient?</a></h3>
+                </div>
+            </div>
+            <div class="col-xl-2 col-md-3">
+                <div class="icon-box">
+                    <h3><a href="/Appointment/New">Book an appointment</a></h3>
+                </div>
+            </div>
+            <div class="col-xl-2 col-md-3">
+                <div class="icon-box">
+                    <h3><a href="/Staff/List">Manage Staff</a></h3>
+                </div>
+            </div>
+            <div class="col-xl-2 col-md-3">
+                <div class="icon-box">
+                    <h3><a href="/Shift/List">View Shifts</a></h3>
+                </div>
+            </div>
+            <div class="col-xl-2 col-md-3">
+                <div class="icon-box">
+                    <h3><a href="/Department/List">Departments</a></h3>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+</section>
