@@ -3,14 +3,34 @@
     ViewBag.Title = "List";
 }
 
-<h2>All Departments Infomation</h2>
+<div>
+    <a href="/Department/New" class="btn btn-dblue btn-lg" role="button">
+        <span class="glyphicon glyphicon-user glyphsize"></span>
+        <br />New
+        <span class="glyphicon glyphicon-plus"></span>
+        <br />Department
+    </a>
+</div>
 
-<a href="/department/new" class="btn btn-lg" role="button">
-    <span class="glyphicon glyphicon-home glyphsize"></span>
-    <br />Add New Department
-</a>
-<div>IsAdmin: @Model.IsAdmin </div>
-@foreach (var department in Model.Departments) { 
-  <h2><a href="/department/details/@department.DID"> @department.DName </a></h2>
-    <div>Department ID: @department.DID</div> }
+<h2>Departments </h2>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var department in Model.Departments)
+        {
+        <tr>
+            <th scope="row">@department.DID</th>
+            <td><a href="/Department/Details/@department.DID">@department.DName</a></td>
+            <td><a href="/Department/Details/@department.DID"><span class="viewLink glyphicon glyphicon-eye-open"></span></a></td>
+            <td><a href="/Department/Edit/@department.DID"><span class="editLink glyphicon glyphicon-pencil"></span></a></td>
+            <td><a href="/Department/DeleteConfirm/@department.DID"><span class="delLink glyphicon glyphicon-trash"></span></a></td>
+        </tr>
+        }
+        </tbody>
+</table>
 

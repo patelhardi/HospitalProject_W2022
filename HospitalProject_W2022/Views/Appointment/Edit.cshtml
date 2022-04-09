@@ -12,26 +12,26 @@
     </a>
 </div>
 
-<form method="POST" action="/Appointment/Update/@Model.SelectedAppointment.AID" enctype="multipart/form-data" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
-    <div style="display:none;">
+<form class="editForm" method="POST" action="/Appointment/Update/@Model.SelectedAppointment.AID" enctype="multipart/form-data">
+    <div class="form-group" style="display:none;">
         @* Pass through the appointment ID *@
-        <input type="text" name="AID" value="@Model.SelectedAppointment.AID" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        <input type="text" name="AID" value="@Model.SelectedAppointment.AID" />
     </div>
-    <div>
-        <label style="padding: 12px 12px 12px 0; display: inline-block;">Date:</label>
-        <input type="date" name="date" id="myDate" value="@Model.SelectedAppointment.Date.ToShortDateString()" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    <div class="form-group">
+        <label>Date:</label>
+        <input type="text" name="date" id="myDate" value="@Model.SelectedAppointment.Date.ToShortDateString()" />
     </div>
-    <div>
-        <label style="padding: 12px 12px 12px 0; display: inline-block;">Time:</label>
-        <input type="text" name="time" value="@Model.SelectedAppointment.Time" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    <div class="form-group">
+        <label>Time:</label>
+        <input type="text" name="time" value="@Model.SelectedAppointment.Time" />
     </div>
-    <div>
-        <label style="padding: 12px 12px 12px 0; display: inline-block;">Reason:</label>
-        <input type="text" name="reason" value="@Model.SelectedAppointment.Reason" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    <div class="form-group">
+        <label>Reason:</label>
+        <input type="text" name="reason" value="@Model.SelectedAppointment.Reason" />
     </div>
-    <div>
-        <label style="padding: 12px 12px 12px 0; display: inline-block;">Patient:</label>
-        <select name="PID" style="padding: 12px 12px 12px 0; display: inline-block;">
+    <div class="form-group">
+        <label>Patient:</label>
+        <select name="PID" >
             @foreach (var patient in Model.PatientOptions)
             {
                 string selected = "";
@@ -43,9 +43,7 @@
             }
         </select>
     </div>
-    <div>
-        <input type="submit" value="Update Appointment" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
-    </div>
+    <button type="submit" class="btn btn-primary" value="Update Appointment">Update Appointment</button>
 </form>
 
 <!--Reference: https://stackoverflow.com/questions/43274559/how-do-i-restrict-past-dates-in-html5-input-type-date-->

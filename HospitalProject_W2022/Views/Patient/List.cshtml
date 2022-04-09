@@ -3,18 +3,44 @@
     ViewBag.Title = "List";
 }
 
-<h2>All Patients Infomation</h2>
-
-<a href="/patient/new" class="btn btn-lg" role="button">
-    <span class="glyphicon glyphicon-home glyphsize"></span>
-    <br />Add New Patient
-</a>
+<div>
+    <a href="/patient/New" class="btn btn-dblue btn-lg" role="button">
+        <span class="glyphicon glyphicon-user glyphsize"></span>
+        <br />New
+        <span class="glyphicon glyphicon-plus"></span>
+        <br />Patient
+    </a>
+</div>
 <div>IsAdmin: @Model.IsAdmin </div>
 
-<ul>
-    @foreach (var patient in Model.Patients)
-    {
-        <li><a href="/patient/details/@patient.PID">Patient ID: @patient.PID | @patient.FName @patient.LName</a></li>
-    }
-</ul>
-
+<h2>List of Patients</h2>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Health Card</th>
+            <th scope="col">Date of Birth</th>
+            <th scope="col">Address</th>
+            <th scope="col">Contact</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var patient in Model.Patients)
+        {
+        <tr>
+            <th scope="row">@patient.PID</th>
+            <td><a href="/Patient/Details/@patient.PID">@patient.FName @patient.LName</a></td>
+            <td>@patient.HC</td>
+            <td>@patient.DOB</td>
+            <td>@patient.Address</td>
+            <td>@patient.Contact</td>
+            <td><a href="/Patient/Details/@patient.PID"><span class="viewLink glyphicon glyphicon-eye-open"></span></a></td>
+            <td><a href="/Patient/Edit/@patient.PID"><span class="editLink glyphicon glyphicon-pencil"></span></a></td>
+            <td><a href="/Patient/DeleteConfirm/@patient.PID"><span class="delLink glyphicon glyphicon-trash"></span></a></td>
+        </tr>
+        }
+    </tbody>
+</table>
+            
+                

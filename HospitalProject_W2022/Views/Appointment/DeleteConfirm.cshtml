@@ -3,7 +3,6 @@
     ViewBag.Title = "DeleteConfirm";
 }
 
-<h2>Do you want to Delete @Model.FName @Model.LName Appointment for @Model.Reason ?</h2>
 
 <a href="/Appointment/List" class="btn btn-dblue btn-lg" role="button">
     <span class="glyphicon glyphicon-arrow-left"></span> Back to
@@ -12,10 +11,10 @@
 
 <br />
 
-<div>
-    <form action="/Appointment/Delete/@Model.AID" method="POST" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
-        <input type="submit" value="Delete" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
-    </form>
-</div>
+<h2 class="text-center">Are you sure you want to delete @Model.FName @Model.LName's appointment on @Model.Date for @Model.Reason at @Model.Time?</h2>
+<a href="/Appointment/List">Cancel</a>
+<form action="/Appointment/Delete/@Model.AID" method="POST" class="text-center">
+    <button type="submit" class="delBtn" value="Delete Appointment"><span class="trashIcon glyphicon glyphicon-trash"></span> Delete</button>
+</form>
 
 

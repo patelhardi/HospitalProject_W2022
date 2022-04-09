@@ -3,12 +3,17 @@
     ViewBag.Title = "DeleteConfirm";
 }
 
-<h2>Are you sure you want to delete this department?</h2>
-<a href="/department/List">Cancel</a>
-<h2>@Model.DName</h2>
-<div>id: @Model.DID </div>
-<form action="/department/Delete/@Model.DID" method="POST">
-    <input type="submit" value="Confirm Delete" />
+<a href="/Department/List" class="btn btn-dblue btn-lg" role="button">
+    <span class="glyphicon glyphicon-arrow-left"></span> Back to
+    <br />the Department list
+</a>
 
+<h2 class="text-center">Are you sure you want to delete this department?</h2>
+<a href="/department/List">Cancel</a>
+<form action="/department/Delete/@Model.DID" method="POST" class="text-center">
+    <button type="submit" class="delBtn" value="Delete Department">
+        <span class="trashIcon glyphicon glyphicon-trash"></span> 
+        Delete
+    </button>
 </form>
 

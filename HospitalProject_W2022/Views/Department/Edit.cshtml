@@ -3,14 +3,24 @@
     ViewBag.Title = "Edit";
 }
 
+<div>
+    <a href="/Department/List" class="btn btn-dblue btn-lg" role="button">
+        <span class="glyphicon glyphicon-arrow-left"></span> Back to
+        <br />the Department list
+    </a>
+</div>
+
 <h2>Update a department</h2>
 
-<form action="/department/Update/@Model.DID" method="post">
-    <div>
-        <label>Department Name:</label> <input type="text" name="DName" />
+<form action="/department/Update/@Model.DID" method="post" class="editForm">
+    <div class="form-group">
+        <label>Department ID:</label> 
+        <input readonly name="DID" value="@Model.DID" />
     </div>
-    <input type="hidden" name="DID" value="@Model.DID" />
-    <div>
-        <input type="submit" value="Update Department" />
+
+    <div class="form-group">
+        <label>Department Name:</label>
+        <input type="text" name="FName" value="@Model.DName" />
     </div>
+    <button type="submit" class="btn btn-primary" value="Update Staff">Update Staff</button>
 </form>

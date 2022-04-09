@@ -27,32 +27,44 @@
     </nav>
 </div>
 
-<div>Date: @Model.SelectedShift.Date.ToLongDateString()</div>
-<div>Type: @Model.SelectedShift.Type</div>
+<h2>Shift Details:</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Date</th>
+            <th scope="col">Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">@Model.SelectedShift.SHID</th>
+            <td>@Model.SelectedShift.Date.ToLongDateString()o</td>
+            <td>@Model.SelectedShift.Type</td>
+        </tr>
+    </tbody>
+</table>
 
-<div>
-    <h3>List of Staffs:</h3>
-    @foreach (var staff in Model.KeptStaff)
-    {
-        <a href="/Staff/Details/@staff.SID">@staff.FName @staff.LName</a>
-        <a href="/Shift/UnAssociate/@Model.SelectedShift.SHID?StaffID=@staff.SID" style="color:red;"> [ x ] </a>
-        <br />
-    }
-</div>
+<h3>List of Staffs:</h3>
+@foreach (var staff in Model.KeptStaff)
+{
+    <a href="/Staff/Details/@staff.SID">@staff.FName @staff.LName</a>
+    <a href="/Shift/UnAssociate/@Model.SelectedShift.SHID?StaffID=@staff.SID"><span class="delLink glyphicon glyphicon-trash"></span> </a>
+    <br />
+}
 
 <hr />
 
-<div>
-    Add More Staffs to the Shift:
-    <form method="POST" action="/Shift/Associate/@Model.SelectedShift.SHID" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
-        <select name="SID" style="padding: 12px 12px 12px 0; display: inline-block;">
+<h3>Add More Staffs to the Shift:</h3>
+<form method="POST" action="/Shift/Associate/@Model.SelectedShift.SHID" class="newForm">
+    <div>
+        <select name="SID">
             @foreach (var staff in Model.StaffOptions)
             {
                 <option value="@staff.SID">@staff.FName @staff.LName </option>
             }
         </select>
-
-        <input type="submit" value="Associate Staff" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
-    </form>
-</div>
+        <button type="submit" class="btn btn-primary" value="Add Staff">Add Staff</button>
+    </div>
+</form>
 

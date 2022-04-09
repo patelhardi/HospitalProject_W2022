@@ -14,9 +14,26 @@
 <div>IsAdmin: @Model.IsAdmin </div>
 
 <h2>List of Shifts</h2>
-@foreach (var shift in Model.Shifts)
-{
-    <div><a href="/Shift/Details/@shift.SHID">Type: @shift.Type</a></div>
-    <div>Date: @shift.Date.ToLongDateString()</div>
-}
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Date</th>
+            <th scope="col">Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var shift in Model.Shifts)
+        {
+            <tr>
+                <th scope="row">@shift.SHID</th>
+                <td><a href="/Shift/Details/@shift.SHID">@shift.Date.ToLongDateString()</a></td>
+                <td>@shift.Type</td>
+                <td><a href="/Shift/Details/@shift.SHID"><span class="viewLink glyphicon glyphicon-eye-open"></span></a></td>
+                <td><a href="/Shift/Edit/@shift.SHID"><span class="editLink glyphicon glyphicon-pencil"></span></a></td>
+                <td><a href="/Shift/DeleteConfirm/@shift.SHID"><span class="delLink glyphicon glyphicon-trash"></span></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
 

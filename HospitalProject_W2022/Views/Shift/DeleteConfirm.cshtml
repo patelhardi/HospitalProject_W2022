@@ -3,18 +3,14 @@
     ViewBag.Title = "DeleteConfirm";
 }
 
-<h2>Do you want to Delete @Model.Type Shift on @Model.Date.ToLongDateString() ?</h2>
-
 <a href="/Shift/List" class="btn btn-dblue btn-lg" role="button">
     <span class="glyphicon glyphicon-arrow-left"></span> Back to
     <br />the Shift list
 </a>
 
-<br />
-
-<div>
-    <form action="/Shift/Delete/@Model.SHID" method="POST" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
-        <input type="submit" value="Delete" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
-    </form>
-</div>
+<h2 class="text-center">Do you want to Delete @Model.Type Shift on @Model.Date.ToLongDateString() ?</h2>
+<a href="/Shift/List">Cancel</a>
+<form action="/Shift/Delete/@Model.SHID" method="POST" class="text-center">
+    <button type="submit" class="delBtn" value="Delete Shift"><span class="trashIcon glyphicon glyphicon-trash"></span> Delete</button>
+</form>
 
