@@ -21,7 +21,7 @@
             <th scope="col">Name</th>
             <th scope="col">Contact</th>
             <th scope="col">Date of Birth</th>
-            <th scope="col">Department ID</th>
+            <th scope="col">Department</th>
         </tr>
     </thead>
     <tbody>
@@ -31,8 +31,8 @@
                 <th scope="row">@staff.SID</th>
                 <td><a href="/Staff/Details/@staff.SID">@staff.FName @staff.LName</a></td>
                 <td>@staff.Contact</td>
-                <td>@staff.DOB</td>
-                <td>@staff.DID</td>
+                <td>@staff.DOB.ToLongDateString()</td>
+                <td>@staff.DName</td>
                 <td><a href="/Staff/Details/@staff.SID"><span class="viewLink glyphicon glyphicon-eye-open"></span></a></td>
                 <td><a href="/Staff/Edit/@staff.SID"><span class="editLink glyphicon glyphicon-pencil"></span></a></td>
                 <td><a href="/Staff/DeleteConfirm/@staff.SID"><span class="delLink glyphicon glyphicon-trash"></span></a></td>
